@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BuzzBoxGamesApp.Game.TicTacToeElement">
+    <Grid x:Name="_grid">
+        <Border         
+            x:DataType="local:TicTacToeElement"
+            Background="{Binding Path=Background, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}"
+            Stroke="Black"
+            VerticalOptions="Fill">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="2" />
+            </Border.StrokeShape>
+            <Border.Triggers>
+                <DataTrigger TargetType="Border" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=Value}" Value="X">
+                    <Setter Property="Background" Value="{Binding Path=XBackground, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}" />
+                </DataTrigger>
+                <DataTrigger TargetType="Border" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=Value}" Value="O">
+                    <Setter Property="Background" Value="{Binding Path=OBackground, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}" />
+                </DataTrigger>
+            </Border.Triggers>
+            <Label
+                FontFamily="OpenSansSemibold"
+                FontSize="48"
+                Text=""
+                Margin="5"
+                TextColor="{Binding Path=TextColor, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}"
+                VerticalOptions="Center"
+                HorizontalTextAlignment="Center">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=Value}" Value="X">
+                        <Setter Property="Text" Value="X" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=Value}" Value="O">
+                        <Setter Property="Text" Value="O" />
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </Border>
+    </Grid>
+</ContentView>

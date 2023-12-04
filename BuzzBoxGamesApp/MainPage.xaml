@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BuzzBoxGamesApp.MainPage">
+    <ContentPage.Resources>
+        <Style x:Key="gameButton" TargetType="Button">
+            <Setter Property="TextColor" Value="WhiteSmoke" />
+            <Setter Property="Background" Value="DarkCyan" />
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='80', MacCatalyst='103.9'}" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid>
+        <Image Source="sky_background.jpg" Aspect="AspectFill" />
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="25">
+            <Label
+                Text="Buzz Box Games"
+                Style="{StaticResource Headline}">
+                <Label.Shadow>
+                    <Shadow Brush="WhiteSmoke" Offset="0,0" Radius="40" Opacity="0.8" />
+                </Label.Shadow>
+            </Label>
+
+            <Button Clicked="Button_Clicked"
+                    Style="{StaticResource gameButton}"
+                    Text="Simon Says" />
+
+            <Button Clicked="Button2_Clicked"
+                    Style="{StaticResource gameButton}"
+                    Text="Reaction Time" />
+        
+            <Button Clicked="Button3_Clicked"
+                    Style="{StaticResource gameButton}"
+                    Text="Drop-Tac-Toe" />
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

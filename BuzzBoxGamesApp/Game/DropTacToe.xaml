@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:b="clr-namespace:BuzzBoxGamesApp.Behaviors"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
+             xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             x:Class="BuzzBoxGamesApp.Game.DropTacToe"
+             Title="Reaction Time"
+             Unloaded="ContentPage_Unloaded">
+    <ContentPage.BindingContext>
+        <vm:DropTacToe />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="instructionsBg" TargetType="Border">
+            <Setter Property="Background" Value="#44222222" />
+            <Setter Property="StrokeThickness" Value="0" />
+        </Style>
+
+        <Style x:Key="instructions" TargetType="Label">
+            <Setter Property="TextColor" Value="Orange" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+
+        <Style x:Key="instructionsText" TargetType="Span">
+            <Setter Property="TextColor" Value="Orange" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+        </Style>
+
+        <Style x:Key="startButton" TargetType="Button">
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='60', MacCatalyst='77.9'}" />
+        </Style>
+
+        <Style x:Key="winner" TargetType="Label">
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="TextColor" Value="Yellow" />
+            <Setter Property="Background" Value="#44000000" />
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='100', MacCatalyst='129.9'}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="inGameInstructions" TargetType="Label">
+            <Setter Property="FontFamily" Value="Stepalange" />
+            <Setter Property="TextColor" Value="Orange" />
+            <Setter Property="Background" Value="#99272727" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+
+        <Style x:Key="paddleNum" TargetType="Label">
+            <Setter Property="FontFamily" Value="Stepalange" />
+            <Setter Property="TextColor" Value="OrangeRed" />
+            <Setter Property="Background" Value="#99272727" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='37', MacCatalyst='46.8'}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <b:TicTacToeInvalidMove SoundName="wrong_buzzer.mp3" />
+    </ContentPage.Behaviors>
+    <Grid>
+        <Image Source="bricks_background.jpg" Aspect="AspectFill" />
+        <VerticalStackLayout IsVisible="{Binding Path=GameIsWaiting}">
+            <Border Style="{StaticResource instructionsBg}">
+                <Label Style="{StaticResource instructions}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource instructionsText}" Text="Instructions: " FontAttributes="Bold" />
+                            <Span Style="{StaticResource instructionsText}" Text="Green and Red paddles take turns adding their tokens to one of four columns.  If either side gets three in a row, that side wins!" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Border>
+            <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40" Text="Start Game"/>
+            <Label Style="{StaticResource winner}" IsVisible="{Binding Path=AreGreenPaddlesWinner}">Green paddles are the Winner!</Label>
+            <Label Style="{StaticResource winner}" IsVisible="{Binding Path=AreRedPaddlesWinner}">Redpaddles are the Winner!</Label>
+            <Label Style="{StaticResource winner}" IsVisible="{Binding Path=IsGameDraw}">The match was draw!</Label>
+        </VerticalStackLayout>
+        <Grid IsVisible="{Binding Path=GameIsStarted}" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"
+                   Style="{StaticResource inGameInstructions}"
+                   IsVisible="{Binding Path=GreenPaddlesTurn}"
+                   Text="Green Paddles Turn!" />
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="7"
+                   Style="{StaticResource inGameInstructions}"
+                   IsVisible="{Binding Path=RedPaddlesTurn}"
+                   Text="Red Paddles Turn!" />
+
+            <Label Grid.Column="0" Grid.Row="2"
+                   Style="{StaticResource paddleNum}"
+                   Text="Paddle 1" />
+            <Label Grid.Column="2" Grid.Row="2"
+                   Style="{StaticResource paddleNum}"
+                   Text="Paddle 2" />
+            <Label Grid.Column="4" Grid.Row="2"
+                   Style="{StaticResource paddleNum}"
+                   Text="Paddle 3" />
+            <Label Grid.Column="6" Grid.Row="2"
+                   Style="{StaticResource paddleNum}"
+                   Text="Paddle 4" />
+
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="0" Value="{Binding Path=Data_0_0}" />
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="2" Value="{Binding Path=Data_0_1}" />
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="4" Value="{Binding Path=Data_0_2}" />
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="6" Value="{Binding Path=Data_0_3}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="0" Value="{Binding Path=Data_1_0}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="2" Value="{Binding Path=Data_1_1}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="4" Value="{Binding Path=Data_1_2}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="6" Value="{Binding Path=Data_1_3}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="0" Value="{Binding Path=Data_2_0}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="2" Value="{Binding Path=Data_2_1}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="4" Value="{Binding Path=Data_2_2}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="6" Value="{Binding Path=Data_2_3}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="0" Value="{Binding Path=Data_3_0}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="2" Value="{Binding Path=Data_3_1}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="4" Value="{Binding Path=Data_3_2}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="6" Value="{Binding Path=Data_3_3}" />
+
+            <Button Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="7"
+                Text="--- Reset ---" Command="{Binding Path=StartGame}" />
+        </Grid>
+    </Grid>
+</ContentPage>

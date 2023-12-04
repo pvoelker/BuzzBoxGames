@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BuzzBoxGamesApp.Game.GlowBlock">
+    <Border
+        x:Name="_border"
+        x:DataType="local:GlowBlock"
+        Background="{Binding Path=Background, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}"
+        Stroke="{Binding Path=DarkBackground, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}"
+        Margin="5">
+        <Label
+            FontFamily="{Binding Path=FontFamily, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}"
+            FontSize="{Binding Path=FontSize, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}"
+            Text="{Binding Path=Text, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}"
+            Margin="5"
+            TextColor="{Binding Path=TextColor, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}"
+            VerticalOptions="Center"
+            HorizontalTextAlignment="Center"/>
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="8" />
+        </Border.StrokeShape>
+        <Border.Shadow>
+            <!-- PEV - 11/16/2023 - Shadow brush is set in code-behind -->
+            <Shadow x:Name="_shadow" Brush="Transparent" Offset="0,0" Radius="10" Opacity="0.8" />
+        </Border.Shadow>
+        <Border.Triggers>
+            <DataTrigger TargetType="Border" Binding="{Binding Path=IsLit, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}" Value="false">
+                <Setter Property="Background" Value="{Binding Path=DarkBackground, Source={RelativeSource AncestorType={x:Type local:GlowBlock}}, Mode=OneWay}" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="Transparent" Offset="0,0" Radius="0" Opacity="0.0" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Border.Triggers>
+    </Border>
+</ContentView>

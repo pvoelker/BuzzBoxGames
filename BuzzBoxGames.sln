@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34302.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuzzBoxGamesApp", "BuzzBoxGamesApp\BuzzBoxGamesApp.csproj", "{7577671C-8988-49F9-9232-6A2DEA91E8B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuzzBoxGames.ViewModel", "BuzzBoxGames.ViewModel\BuzzBoxGames.ViewModel.csproj", "{3785AEEF-30A3-4813-AA2B-0E96B71D365D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7577671C-8988-49F9-9232-6A2DEA91E8B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7577671C-8988-49F9-9232-6A2DEA91E8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7577671C-8988-49F9-9232-6A2DEA91E8B0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7577671C-8988-49F9-9232-6A2DEA91E8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7577671C-8988-49F9-9232-6A2DEA91E8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7577671C-8988-49F9-9232-6A2DEA91E8B0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3785AEEF-30A3-4813-AA2B-0E96B71D365D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3785AEEF-30A3-4813-AA2B-0E96B71D365D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3785AEEF-30A3-4813-AA2B-0E96B71D365D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3785AEEF-30A3-4813-AA2B-0E96B71D365D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {627AF777-E50E-4EF1-9C13-4023D54EB0E1}
+	EndGlobalSection
+EndGlobal

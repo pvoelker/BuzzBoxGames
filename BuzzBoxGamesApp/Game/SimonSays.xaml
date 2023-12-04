@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:b="clr-namespace:BuzzBoxGamesApp.Behaviors"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
+             xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="BuzzBoxGamesApp.Game.SimonSays"
+             x:DataType="vm:SimonSays"
+             Title="Simon Says"
+             Unloaded="ContentPage_Unloaded">
+    <ContentPage.BindingContext>
+        <vm:SimonSays />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <Style x:Key="paddleLight" TargetType="local:GlowBlock">
+            <Setter Property="TextColor" Value="WhiteSmoke" />
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+        </Style>
+
+        <Style x:Key="greenPaddleLight" TargetType="local:GlowBlock" BasedOn="{StaticResource paddleLight}">
+            <Setter Property="Background" Value="LightGreen" />
+            <Setter Property="DarkBackground" Value="Green" />
+            <Setter Property="HaloColor" Value="Green" />
+        </Style>
+
+        <Style x:Key="redPaddleLight" TargetType="local:GlowBlock" BasedOn="{StaticResource paddleLight}">
+            <Setter Property="Background" Value="Red" />
+            <Setter Property="DarkBackground" Value="DarkRed" />
+            <Setter Property="HaloColor" Value="DarkRed" />
+        </Style>
+
+        <Style x:Key="score" TargetType="Label">
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="TextColor" Value="Yellow" />
+            <Setter Property="Background" Value="#44000000" />
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='100', MacCatalyst='129.9'}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="inGameInstructions" TargetType="Label">
+            <Setter Property="FontFamily" Value="Stepalange" />
+            <Setter Property="TextColor" Value="Orange" />
+            <Setter Property="Background" Value="#99272727" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+
+        <Style x:Key="instructionsBg" TargetType="Border">
+            <Setter Property="Background" Value="#99272727" />
+            <Setter Property="StrokeThickness" Value="0" />
+        </Style>
+
+        <Style x:Key="instructions" TargetType="Label">
+            <Setter Property="TextColor" Value="Orange" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+
+        <Style x:Key="instructionsText" TargetType="Span">
+            <Setter Property="TextColor" Value="Orange" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+        </Style>
+
+        <Style x:Key="startButton" TargetType="Button">
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='60', MacCatalyst='77.9'}" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Behaviors>
+        <b:WrongPaddlePress SoundName="wrong_buzzer.mp3" />
+    </ContentPage.Behaviors>
+    <Grid>
+        <Image Source="rocks_background.jpg" Aspect="AspectFill" />
+        <VerticalStackLayout IsVisible="{Binding Path=GameIsWaiting}">
+            <Border Style="{StaticResource instructionsBg}">
+                <Label Style="{StaticResource instructions}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Style="{StaticResource instructionsText}" Text="Instructions: " FontAttributes="Bold" />
+                            <Span Style="{StaticResource instructionsText}" Text="Repeat the paddle press pattern given. The game starts at one (1) paddle press in the pattern.  Each round another paddle press is added.  The game ends when the first mistake is made." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Border>
+            <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40"  Text="Start Game"/>
+            <Label Style="{StaticResource score}"  IsVisible="{Binding Path=HasScore}" Text="{Binding Path=Score, StringFormat='Score: {0}'}" />
+        </VerticalStackLayout>
+        <Grid IsVisible="{Binding Path=GameIsStarted}"  Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                   Style="{StaticResource inGameInstructions}"
+                   Text="{Binding Path=InGameInstructions}" />
+
+            <local:GlowBlock Grid.Column="0" Grid.Row="1"
+                             Text="Paddle 1"
+                             Style="{StaticResource greenPaddleLight}"
+                             IsLit="{Binding Path=PaddleGreen1Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_c4.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>
+            <local:GlowBlock Grid.Column="0" Grid.Row="3"
+                             Text="Paddle 2"
+                             Style="{StaticResource greenPaddleLight}"
+                             IsLit="{Binding Path=PaddleGreen2Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_d4.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>            
+            <local:GlowBlock Grid.Column="0" Grid.Row="5"
+                             Text="Paddle 3"
+                             Style="{StaticResource greenPaddleLight}"
+                             IsLit="{Binding Path=PaddleGreen3Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_e4.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>            
+            <local:GlowBlock Grid.Column="0" Grid.Row="7"
+                             Text="Paddle 4"
+                             Style="{StaticResource greenPaddleLight}"
+                             IsLit="{Binding Path=PaddleGreen4Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_f4.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>            
+
+            <local:GlowBlock Grid.Column="2" Grid.Row="1"
+                             Text="Paddle 1"
+                             Style="{StaticResource redPaddleLight}"
+                             IsLit="{Binding Path=PaddleRed1Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_g4.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>
+            <local:GlowBlock Grid.Column="2" Grid.Row="3"
+                             Text="Paddle 2"
+                             Style="{StaticResource redPaddleLight}"
+                             IsLit="{Binding Path=PaddleRed2Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_a4.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>
+            <local:GlowBlock Grid.Column="2" Grid.Row="5"
+                             Text="Paddle 3"
+                             Style="{StaticResource redPaddleLight}"
+                             IsLit="{Binding Path=PaddleRed3Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_b4.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>
+            <local:GlowBlock Grid.Column="2" Grid.Row="7"
+                             Text="Paddle 4"
+                             Style="{StaticResource redPaddleLight}"
+                             IsLit="{Binding Path=PaddleRed4Lit}">
+                <local:GlowBlock.Behaviors>
+                    <b:GlowBlockPlaySound SoundName="beep_c5.wav" />
+                </local:GlowBlock.Behaviors>
+            </local:GlowBlock>
+        </Grid>
+    </Grid>
+</ContentPage>
