@@ -50,7 +50,12 @@
 		<Copyright>Copyright © 2023 Paul Voelker</Copyright>
 		<DefaultLanguage>en</DefaultLanguage>
 	</PropertyGroup>
-	
+
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
+		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+		<PackageCertificateThumbprint>8fd9f7c803428d3d12ff9586e0a5dcf9f0f7424f</PackageCertificateThumbprint>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />

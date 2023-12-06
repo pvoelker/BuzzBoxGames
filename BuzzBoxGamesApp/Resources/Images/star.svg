@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="svg0"
+   viewBox="0 0 48 48"
+   version="1.0"
+   sodipodi:docname="star.svg"
+   width="192"
+   height="192"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <sodipodi:namedview
+     id="namedview26"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1"
+     inkscape:cx="24.5"
+     inkscape:cy="24.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg0" />
+  <defs
+     id="defs">
+    <linearGradient
+       id="G3"
+       y2="34.826"
+       gradientUnits="userSpaceOnUse"
+       x2="24.031"
+       y1="7.0243001"
+       x1="14.66">
+      <stop
+         id="s3"
+         stop-color="#fcf9fb"
+         offset="0" />
+      <stop
+         id="s4"
+         stop-color="#fcf9fb"
+         stop-opacity="0"
+         offset="1" />
+    </linearGradient>
+    <radialGradient
+       id="R0"
+       gradientUnits="userSpaceOnUse"
+       cy="22"
+       cx="24"
+       gradientTransform="matrix(1,-0.2,0.2,1,-3.8,6.8)"
+       r="22">
+      <stop
+         id="s1"
+         stop-color="#e6cf00"
+         offset="0" />
+      <stop
+         id="s2"
+         stop-color="#fde94a"
+         offset="1" />
+    </radialGradient>
+    <radialGradient
+       id="R1"
+       gradientUnits="userSpaceOnUse"
+       cy="25.531"
+       cx="17.312"
+       gradientTransform="matrix(2.4,0,0,0.67,-17.1,22.4)"
+       r="9.6875">
+      <stop
+         id="s5"
+         stop-opacity=".63"
+         offset="0" />
+      <stop
+         id="s6"
+         stop-opacity="0"
+         offset="1" />
+    </radialGradient>
+  </defs>
+  <path
+     id="s"
+     opacity="0.5"
+     fill="url(#R1)"
+     d="M 47,39.5 C 47,43.09 36.703,46 24,46 11.297,46 1,43.09 1,39.5 1,35.91 11.297,32 24,32 c 12.703,0 23,3.91 23,7.5 z"
+     style="fill:url(#R1)" />
+  <path
+     id="star"
+     stroke="#c4a000"
+     fill="url(#R0)"
+     d="M 37.311,41.5 24.031,34.826 10.735,41.471 13.289,27.369 2.551,17.368 17.41,15.326 24.069,2.5 l 6.628,12.84 14.854,2.074 -10.762,9.978 z"
+     style="fill:url(#R0)" />
+  <path
+     id="hl"
+     opacity="0.8"
+     fill="url(#G3)"
+     d="m 17.732,15.791 6.332,-12.204 6.305,12.208 14.071,1.966 -3.62,3.361 c -16.437,-3.688 -9.455,7.22 -27.568,9.243 L 13.82,27.184 3.66,17.719 c 5e-4,0 14.072,-1.928 14.072,-1.928 z"
+     style="fill:url(#G3)" />
+  <path
+     id="ol"
+     opacity="0.69"
+     d="m 35.974,39.713 -11.946,-6.004 -11.945,5.969 2.28,-12.669 -9.5854,-8.939 13.278,-1.822 6.007,-11.57 5.982,11.578 13.278,1.857 -9.609,8.922 2.26,12.678 z"
+     stroke="#ffffff"
+     fill="none" />
+  <metadata
+     id="metadata23">
+    <rdf:RDF />
+  </metadata>
+</svg>

@@ -43,6 +43,7 @@ namespace BuzzBoxGamesApp
                 }
 
                 builder.AppendLine(string.Empty);
+                builder.AppendLine("• Works with Brian's Boxes USB quiz sets");
                 builder.AppendLine("• Given to the glory of God");
 
                 await DisplayAlert("About Game", builder.ToString(), "OK");

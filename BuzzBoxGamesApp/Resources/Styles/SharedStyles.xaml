@@ -33,7 +33,7 @@
 
     <Style x:Key="resetButton" TargetType="Button">
         <Setter Property="FontFamily" Value="SuperFresh" />
-        <Setter Property="FontSize" Value="{OnPlatform Default='60', MacCatalyst='77.9'}" />
+        <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
     </Style>
 
 </ResourceDictionary>

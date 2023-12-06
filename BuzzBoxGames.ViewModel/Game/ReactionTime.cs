@@ -43,6 +43,37 @@ namespace BuzzBoxGames.ViewModel.Game
             PaddleGreen3Time = (double?)e.Green3Time;
             PaddleGreen4Time = (double?)e.Green4Time;
 
+            IsPaddleRed1Winner = false;
+            IsPaddleRed2Winner = false;
+            IsPaddleRed3Winner = false;
+            IsPaddleRed4Winner = false;
+
+            IsPaddleGreen1Winner = false;
+            IsPaddleGreen2Winner = false;
+            IsPaddleGreen3Winner = false;
+            IsPaddleGreen4Winner = false;
+
+            var timesList = new List<Tuple<Action, double?>>
+            {
+                new(() => { IsPaddleRed1Winner = true; }, PaddleRed1Time),
+                new(() => { IsPaddleRed2Winner = true; }, PaddleRed2Time),
+                new(() => { IsPaddleRed3Winner = true; }, PaddleRed3Time),
+                new(() => { IsPaddleRed4Winner = true; }, PaddleRed4Time),
+                new(() => { IsPaddleGreen1Winner = true; }, PaddleGreen1Time),
+                new(() => { IsPaddleGreen2Winner = true; }, PaddleGreen2Time),
+                new(() => { IsPaddleGreen3Winner = true; }, PaddleGreen3Time),
+                new(() => { IsPaddleGreen4Winner = true; }, PaddleGreen4Time)
+            };
+
+            var minTime = timesList.MaxBy(x => x.Item2)?.Item2;
+
+            var minTimePlayers = timesList.Where(x => x.Item2 != null && x.Item2 == minTime).ToList();
+
+            foreach(var item in minTimePlayers)
+            {
+                item.Item1.Invoke();
+            }
+
             EndGame.Execute(null);
         }
 
@@ -98,6 +129,12 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleRed1Score { get => MaxTime - _paddleRed1Time; }
         public bool DidPaddleRed1BuzzIn { get => _paddleRed1Time != null; }
         public bool DidPaddleRed1NotBuzzIn { get => _paddleRed1Time == null; }
+        private bool _isPaddleRed1Winner = false;
+        public bool IsPaddleRed1Winner
+        {
+            get => _isPaddleRed1Winner;
+            set => SetProperty(ref _isPaddleRed1Winner, value);
+        }
 
         private double? _paddleRed2Time = 0;
         public double? PaddleRed2Time
@@ -114,6 +151,12 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleRed2Score { get => MaxTime - _paddleRed2Time; }
         public bool DidPaddleRed2BuzzIn { get => _paddleRed2Time != null; }
         public bool DidPaddleRed2NotBuzzIn { get => _paddleRed2Time == null; }
+        private bool _isPaddleRed2Winner = false;
+        public bool IsPaddleRed2Winner
+        {
+            get => _isPaddleRed2Winner;
+            set => SetProperty(ref _isPaddleRed2Winner, value);
+        }
 
         private double? _paddleRed3Time = 0;
         public double? PaddleRed3Time
@@ -130,6 +173,12 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleRed3Score { get => MaxTime - _paddleRed3Time; }
         public bool DidPaddleRed3BuzzIn { get => _paddleRed3Time != null; }
         public bool DidPaddleRed3NotBuzzIn { get => _paddleRed3Time == null; }
+        private bool _isPaddleRed3Winner = false;
+        public bool IsPaddleRed3Winner
+        {
+            get => _isPaddleRed3Winner;
+            set => SetProperty(ref _isPaddleRed3Winner, value);
+        }
 
         private double? _paddleRed4Time = 0;
         public double? PaddleRed4Time
@@ -146,6 +195,12 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleRed4Score { get => MaxTime - _paddleRed4Time; }
         public bool DidPaddleRed4BuzzIn { get => _paddleRed4Time != null; }
         public bool DidPaddleRed4NotBuzzIn { get => _paddleRed4Time == null; }
+        private bool _isPaddleRed4Winner = false;
+        public bool IsPaddleRed4Winner
+        {
+            get => _isPaddleRed4Winner;
+            set => SetProperty(ref _isPaddleRed4Winner, value);
+        }
 
         private double? _paddleGreen1Time = 0;
         public double? PaddleGreen1Time
@@ -162,6 +217,12 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleGreen1Score { get => MaxTime - _paddleGreen1Time; }
         public bool DidPaddleGreen1BuzzIn { get => _paddleGreen1Time != null; }
         public bool DidPaddleGreen1NotBuzzIn { get => _paddleGreen1Time == null; }
+        private bool _isPaddleGreen1Winner = false;
+        public bool IsPaddleGreen1Winner
+        {
+            get => _isPaddleGreen1Winner;
+            set => SetProperty(ref _isPaddleGreen1Winner, value);
+        }
 
         private double? _paddleGreen2Time = 0;
         public double? PaddleGreen2Time
@@ -178,6 +239,12 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleGreen2Score { get => MaxTime - _paddleGreen2Time; }
         public bool DidPaddleGreen2BuzzIn { get => _paddleGreen2Time != null; }
         public bool DidPaddleGreen2NotBuzzIn { get => _paddleGreen2Time == null; }
+        private bool _isPaddleGreen2Winner = false;
+        public bool IsPaddleGreen2Winner
+        {
+            get => _isPaddleGreen2Winner;
+            set => SetProperty(ref _isPaddleGreen2Winner, value);
+        }
 
         private double? _paddleGreen3Time = 0;
         public double? PaddleGreen3Time
@@ -194,6 +261,12 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleGreen3Score { get => MaxTime - _paddleGreen2Time; }
         public bool DidPaddleGreen3BuzzIn { get => _paddleGreen3Time != null; }
         public bool DidPaddleGreen3NotBuzzIn { get => _paddleGreen3Time == null; }
+        private bool _isPaddleGreen3Winner = false;
+        public bool IsPaddleGreen3Winner
+        {
+            get => _isPaddleGreen3Winner;
+            set => SetProperty(ref _isPaddleGreen3Winner, value);
+        }
 
         private double? _paddleGreen4Time = 0;
         public double? PaddleGreen4Time
@@ -210,5 +283,11 @@ namespace BuzzBoxGames.ViewModel.Game
         public double? PaddleGreen4Score { get => MaxTime - _paddleGreen2Time; }
         public bool DidPaddleGreen4BuzzIn { get => _paddleGreen4Time != null; }
         public bool DidPaddleGreen4NotBuzzIn { get => _paddleGreen4Time == null; }
+        private bool _isPaddleGreen4Winner = false;
+        public bool IsPaddleGreen4Winner
+        {
+            get => _isPaddleGreen4Winner;
+            set => SetProperty(ref _isPaddleGreen4Winner, value);
+        }
     }
 }
