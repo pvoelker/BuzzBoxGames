@@ -15,7 +15,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         public BaseGame()
         {
-            _api.ReadThreadDisconnection += _api_ReadThreadDisconnection;
+            _api.DisconnectionDetected += _api_DisconnectionDetected;
 
             StartGame = new RelayCommand(() =>
             {
@@ -51,7 +51,7 @@ namespace BuzzBoxGames.ViewModel.Game
             });
         }
 
-        private void _api_ReadThreadDisconnection(object? sender, DisconnectionEventArgs e)
+        private void _api_DisconnectionDetected(object? sender, DisconnectionEventArgs e)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {

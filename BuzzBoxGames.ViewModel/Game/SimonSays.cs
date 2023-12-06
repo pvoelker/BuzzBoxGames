@@ -35,6 +35,20 @@ namespace BuzzBoxGames.ViewModel.Game
             _repeatCurrentSequenceIndex = null;
 
             Score = 0;
+
+            NextSequence = new RelayCommand(() =>
+            {
+                _repeatCurrentSequenceIndex = null;
+
+                _sequence.Add(GetRandomPaddle());
+
+                if (Score != null)
+                {
+                    Score = Score.Value + 1;
+                }
+
+                PlaySequence();
+            });
         }
 
         protected override void AbortGame()
@@ -62,16 +76,11 @@ namespace BuzzBoxGames.ViewModel.Game
                             }
                             else
                             {
-                                _repeatCurrentSequenceIndex = null;
+                                CorrectSequence = true;
 
-                                _sequence.Add(GetRandomPaddle());
+                                InGameInstructions = "Good job! Keep going...";
 
-                                if (Score != null)
-                                {
-                                    Score = Score.Value + 1;
-                                }
-
-                                PlaySequence();
+                                // Wait for NextSequence to be called
                             }
 
                             _api.Reset();
@@ -99,6 +108,8 @@ namespace BuzzBoxGames.ViewModel.Game
         }
 
         #region Commands
+
+        public IRelayCommand NextSequence { get; set; }
 
         public IRelayCommand? WrongPaddlePress { get; set; }
 
@@ -193,8 +204,17 @@ namespace BuzzBoxGames.ViewModel.Game
             private set => SetProperty(ref _paddleGreen4Lit, value);
         }
 
+        private bool _correctSequence = false;
+        public bool CorrectSequence
+        {
+            get => _correctSequence;
+            private set => SetProperty(ref _correctSequence, value);
+        }
+
         private void PlaySequence()
         {
+            CorrectSequence = false;
+
             var _ = Task.Run(async () =>
             {
                 InGameInstructions = "Listen for the pattern...";

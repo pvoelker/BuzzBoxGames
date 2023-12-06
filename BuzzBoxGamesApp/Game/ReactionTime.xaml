@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
              xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="BuzzBoxGamesApp.Game.ReactionTime"
              Title="Reaction Time"
              Unloaded="ContentPage_Unloaded">
@@ -11,25 +12,58 @@
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Style x:Key="scoreBar" TargetType="local:VerticalDataBar">
-            <Setter Property="TextColor" Value="White" />
             <Setter Property="FontFamily" Value="OpenSansSemibold" />
             <Setter Property="FontSize" Value="{OnPlatform Default='36', MacCatalyst='46.8'}" />
-            <Setter Property="Bar" Value="LightBlue" />
-            <Setter Property="Background" Value="CadetBlue" />
+            <Setter Property="Background" Value="#55FFFFFF" />
+            <Setter Property="Bar">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="Orange"
+                          Offset="0.1" />
+                        <GradientStop Color="DarkOrange"
+                          Offset="1.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="scoreBarGreen" TargetType="local:VerticalDataBar" BasedOn="{StaticResource scoreBar}">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+
+        <Style x:Key="scoreBarRed" TargetType="local:VerticalDataBar" BasedOn="{StaticResource scoreBar}">
+            <Setter Property="TextColor" Value="DarkRed" />
         </Style>
 
         <Style x:Key="noBuzzIn" TargetType="Label">
-            <Setter Property="Background" Value="#44222222" />
-            <Setter Property="TextColor" Value="Aqua" />
+            <Setter Property="Background" Value="#CC222222" />
             <Setter Property="FontFamily" Value="SuperFresh" />
             <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
             <Setter Property="HorizontalOptions" Value="Fill" />
             <Setter Property="VerticalOptions" Value="Center" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
+
+        <Style x:Key="noBuzzInGreen" TargetType="Label" BasedOn="{StaticResource noBuzzIn}">
+            <Setter Property="TextColor" Value="LightGreen" />
+        </Style>
+
+        <Style x:Key="noBuzzInRed" TargetType="Label" BasedOn="{StaticResource noBuzzIn}">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+
+        <Style x:Key="preGameInstructions" TargetType="Label" BasedOn="{StaticResource noBuzzIn}">
+            <Setter Property="FontSize" Value="{OnPlatform Default='80', MacCatalyst='103.9'}" />
+            <Setter Property="TextColor" Value="Yellow" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Shadow">
+                <Shadow Brush="White" Offset="0,0" Radius="5" Opacity="0.5" />
+            </Setter>
+        </Style>
     </ContentPage.Resources>
     <Grid>
-        <Image Source="wood_background.jpg" Aspect="AspectFill" />
+        <Image Source="grass_background.jpg" Aspect="AspectFill" />
         <VerticalStackLayout IsVisible="{Binding Path=GameIsWaiting}">
             <Border Style="{StaticResource instructionsBg}">
                 <Label Style="{StaticResource instructions}">
@@ -44,7 +78,7 @@
             <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40"  Text="Start Game"/>
         </VerticalStackLayout>
         <Grid IsVisible="{Binding Path=GameIsStarted}">
-            <Label TextColor="Yellow" FontSize="60">Wait for the yellow light to come on!</Label>
+            <Label Style="{StaticResource preGameInstructions}">Wait for the yellow light to come on!</Label>
         </Grid>
         <Grid IsVisible="{Binding Path=GameIsDone}" Margin="10">
             <Grid.RowDefinitions>
@@ -71,13 +105,13 @@
             </Grid.ColumnDefinitions>
 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="0"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed1BuzzIn}"
                                    Text="{Binding Path=PaddleRed1Time, StringFormat='Red&#x0a;1&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleRed1Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="0"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInRed}"
                    IsVisible="{Binding Path=DidPaddleRed1NotBuzzIn}">
                 <Label.Text>
                     Red
@@ -87,13 +121,13 @@
             </Label>
 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="2"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed2BuzzIn}"
                                    Text="{Binding Path=PaddleRed2Time, StringFormat='Red&#x0a;2&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleRed2Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="2"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInRed}"
                    IsVisible="{Binding Path=DidPaddleRed2NotBuzzIn}">
                 <Label.Text>
                     Red
@@ -103,13 +137,13 @@
             </Label>
                 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="4"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed3BuzzIn}"
                                    Text="{Binding Path=PaddleRed3Time, StringFormat='Red&#x0a;3&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleRed3Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="4"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInRed}"
                    IsVisible="{Binding Path=DidPaddleRed3NotBuzzIn}">
                 <Label.Text>
                     Red
@@ -119,13 +153,13 @@
             </Label>
 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="6"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed4BuzzIn}"
                                    Text="{Binding Path=PaddleRed4Time, StringFormat='Red&#x0a;4&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleRed4Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="6"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInRed}"
                    IsVisible="{Binding Path=DidPaddleRed4NotBuzzIn}">
                 <Label.Text>
                     Red
@@ -135,13 +169,13 @@
             </Label>
 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="8"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen1BuzzIn}"
                                    Text="{Binding Path=PaddleGreen1Time, StringFormat='Green&#x0a;1&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleGreen1Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="8"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInGreen}"
                    IsVisible="{Binding Path=DidPaddleGreen1NotBuzzIn}">
                 <Label.Text>
                     Green
@@ -151,13 +185,13 @@
             </Label>
 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="10"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen2BuzzIn}"
                                    Text="{Binding Path=PaddleGreen2Time, StringFormat='Green&#x0a;2&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleGreen2Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="10"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInGreen}"
                    IsVisible="{Binding Path=DidPaddleGreen2NotBuzzIn}">
                 <Label.Text>
                     Green
@@ -167,13 +201,13 @@
             </Label>
 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="12"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen3BuzzIn}"
                                    Text="{Binding Path=PaddleGreen3Time, StringFormat='Green&#x0a;3&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleGreen3Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="12"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInGreen}"
                    IsVisible="{Binding Path=DidPaddleGreen3NotBuzzIn}">
                 <Label.Text>
                     Green
@@ -183,13 +217,13 @@
             </Label>
 
             <local:VerticalDataBar Grid.Row="0" Grid.Column="14"
-                                   Style="{StaticResource scoreBar}"
+                                   Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen4BuzzIn}"
                                    Text="{Binding Path=PaddleGreen4Time, StringFormat='Green&#x0a;4&#x0a;&#x0a;{0:0} ms' }"
                                    Value="{Binding Path=PaddleGreen4Score}"
                                    Max="{Binding Path=MaxTime}"/>
             <Label Grid.Row="0" Grid.Column="14"
-                   Style="{StaticResource noBuzzIn}"
+                   Style="{StaticResource noBuzzInGreen}"
                    IsVisible="{Binding Path=DidPaddleGreen4NotBuzzIn}">
                 <Label.Text>
                     Green
@@ -199,7 +233,8 @@
             </Label>
 
             <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="15"
-                Text="--- Reset ---" Command="{Binding Path=StartGame}" />
+                    Style="{StaticResource resetButton}"
+                    Text="Restart Game" Command="{Binding Path=StartGame}" />
         </Grid>
     </Grid>
 </ContentPage>

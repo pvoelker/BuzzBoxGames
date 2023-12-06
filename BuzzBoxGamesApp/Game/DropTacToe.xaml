@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
              xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="BuzzBoxGamesApp.Game.DropTacToe"
              Title="Reaction Time"
              Unloaded="ContentPage_Unloaded">
@@ -59,7 +60,7 @@
             </Border>
             <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40" Text="Start Game"/>
             <Label Style="{StaticResource winner}" IsVisible="{Binding Path=AreGreenPaddlesWinner}">Green paddles are the Winner!</Label>
-            <Label Style="{StaticResource winner}" IsVisible="{Binding Path=AreRedPaddlesWinner}">Redpaddles are the Winner!</Label>
+            <Label Style="{StaticResource winner}" IsVisible="{Binding Path=AreRedPaddlesWinner}">Red paddles are the Winner!</Label>
             <Label Style="{StaticResource winner}" IsVisible="{Binding Path=IsGameDraw}">The match was draw!</Label>
         </VerticalStackLayout>
         <Grid IsVisible="{Binding Path=GameIsStarted}" Margin="10">

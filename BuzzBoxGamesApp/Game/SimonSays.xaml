@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
              xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="BuzzBoxGamesApp.Game.SimonSays"
              x:DataType="vm:SimonSays"
              Title="Simon Says"
@@ -107,7 +108,7 @@
                 <local:GlowBlock.Behaviors>
                     <b:GlowBlockPlaySound SoundName="beep_d4.wav" />
                 </local:GlowBlock.Behaviors>
-            </local:GlowBlock>            
+            </local:GlowBlock>
             <local:GlowBlock Grid.Column="0" Grid.Row="5"
                              Text="Paddle 3"
                              Style="{StaticResource greenPaddleLight}"
@@ -115,7 +116,7 @@
                 <local:GlowBlock.Behaviors>
                     <b:GlowBlockPlaySound SoundName="beep_e4.wav" />
                 </local:GlowBlock.Behaviors>
-            </local:GlowBlock>            
+            </local:GlowBlock>
             <local:GlowBlock Grid.Column="0" Grid.Row="7"
                              Text="Paddle 4"
                              Style="{StaticResource greenPaddleLight}"
@@ -123,7 +124,7 @@
                 <local:GlowBlock.Behaviors>
                     <b:GlowBlockPlaySound SoundName="beep_f4.wav" />
                 </local:GlowBlock.Behaviors>
-            </local:GlowBlock>            
+            </local:GlowBlock>
 
             <local:GlowBlock Grid.Column="2" Grid.Row="1"
                              Text="Paddle 1"
@@ -157,6 +158,13 @@
                     <b:GlowBlockPlaySound SoundName="beep_c5.wav" />
                 </local:GlowBlock.Behaviors>
             </local:GlowBlock>
+
+            <skia:SKLottieView x:Name="_confetti"  Grid.ColumnSpan="3" Grid.RowSpan="8"
+                Source="confetti.json"
+                IsAnimationEnabled="{Binding Path=CorrectSequence}"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+            </skia:SKLottieView>
         </Grid>
     </Grid>
 </ContentPage>
