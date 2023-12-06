@@ -21,13 +21,15 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>BuzzBoxGamesApp</ApplicationTitle>
+		<ApplicationTitle>Buzz Box Games</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>paulvoelker.buzzboxgamesapp</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>		
+		<ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -38,6 +40,17 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<AssemblyName>JBQQuizMe</AssemblyName>
+		<Authors>Paul Voelker</Authors>
+		<PublisherName>Paul Voelker</PublisherName>
+		<Title>Buzz Box Games</Title>
+		<Product>Buzz Box Games</Product>
+		<Description>A collection of games to play using Brian's Boxes quizzing sets</Description>
+		<Copyright>Copyright © 2023 Paul Voelker</Copyright>
+		<DefaultLanguage>en</DefaultLanguage>
+	</PropertyGroup>
+	
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -96,6 +109,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Game\SimonSays.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\SharedStyles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

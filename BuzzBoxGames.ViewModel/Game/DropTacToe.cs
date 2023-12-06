@@ -17,7 +17,6 @@ namespace BuzzBoxGames.ViewModel.Game
         public DropTacToe()
         {
             _api.BuzzIn += _api_BuzzIn;
-            _api.ReadThreadDisconnection += _api_ReadThreadDisconnection;
 
             _gameEngine = Factory.CreateNewGame(2, 3, [4, 4]);
         }
@@ -46,6 +45,11 @@ namespace BuzzBoxGames.ViewModel.Game
             _api.Reset();
 
             GameState = GameStateEnum.Started;
+        }
+
+        protected override void AbortGame()
+        {
+            GameState = GameStateEnum.Waiting;
         }
 
         private void _api_BuzzIn(object? sender, BuzzInEventArgs e)
@@ -94,25 +98,6 @@ namespace BuzzBoxGames.ViewModel.Game
                 }
 
                 _api.Reset();
-            });
-        }
-
-        private void _api_ReadThreadDisconnection(object? sender, DisconnectionEventArgs e)
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                const string errMsg = "Quiz box has disconnected, cancelling game...";
-
-                if (MessageBoxService != null)
-                {
-                    MessageBoxService.ShowError(errMsg);
-                }
-                else
-                {
-                    throw new InvalidOperationException(errMsg);
-                }
-
-                GameState = GameStateEnum.Waiting;
             });
         }
 

@@ -1,27 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel;assembly=BuzzBoxGames.ViewModel"
              x:Class="BuzzBoxGamesApp.MainPage">
+    <ContentPage.BindingContext>
+        <vm:MainMenu />
+    </ContentPage.BindingContext>
     <ContentPage.Resources>
+        <Style x:Key="gameTitle" TargetType="Label">
+            <Setter Property="TextColor" Value="Orange" />
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='60', MacCatalyst='77.9'}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="Shadow">
+                <Shadow Brush="Black" Offset="0,0" Radius="20" Opacity="1.0" />
+            </Setter>
+        </Style>
+
         <Style x:Key="gameButton" TargetType="Button">
             <Setter Property="TextColor" Value="WhiteSmoke" />
             <Setter Property="Background" Value="DarkCyan" />
             <Setter Property="FontFamily" Value="SuperFresh" />
             <Setter Property="FontSize" Value="{OnPlatform Default='80', MacCatalyst='103.9'}" />
             <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="Shadow">
+                <Shadow Brush="Black" Offset="0,0" Radius="5" Opacity="1.0" />
+            </Setter>
+        </Style>
+
+        <Style x:Key="aboutButton" TargetType="Button">
+            <Setter Property="TextColor" Value="{StaticResource White}" />
+            <Setter Property="Background" Value="Orange" />
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='18', MacCatalyst='23.4'}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Padding" Value="5,0" />
+        </Style>
+
+        <Style x:Key="versionText" TargetType="Label">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray100}}" />
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='16', MacCatalyst='20.8'}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
     </ContentPage.Resources>
     <Grid>
         <Image Source="sky_background.jpg" Aspect="AspectFill" />
         <VerticalStackLayout
             Padding="30,0"
-            Spacing="25">
+            Spacing="10">
             <Label
                 Text="Buzz Box Games"
-                Style="{StaticResource Headline}">
-                <Label.Shadow>
-                    <Shadow Brush="WhiteSmoke" Offset="0,0" Radius="40" Opacity="0.8" />
-                </Label.Shadow>
+                Style="{StaticResource gameTitle}">
             </Label>
 
             <Button Clicked="Button_Clicked"
@@ -35,6 +67,20 @@
             <Button Clicked="Button3_Clicked"
                     Style="{StaticResource gameButton}"
                     Text="Drop-Tac-Toe" />
+
+            <HorizontalStackLayout
+                Margin="10"
+                HorizontalOptions="Center">
+                <Label 
+                    Style="{StaticResource versionText}"
+                    IsVisible="{Binding Path=IsVersionInfoPresent}"
+                    Text="{Binding Path=Version, StringFormat='Version {0}'}"
+                    Margin="0,0,10,0"/>
+                <Button
+                    Style="{StaticResource aboutButton}"
+                    Text="About..."
+                    Clicked="InfoButton_Clicked" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </Grid>
 

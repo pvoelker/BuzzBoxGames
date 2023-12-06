@@ -15,7 +15,6 @@ namespace BuzzBoxGames.ViewModel.Game
             _api.GameStarted += _api_GameStarted;
             _api.GameLightOn += _api_GameLightOn;
             _api.GameDone += _api_GameDone;
-            _api.ReadThreadDisconnection += _api_ReadThreadDisconnection;
         }
 
         protected override void ResetGame()
@@ -23,6 +22,11 @@ namespace BuzzBoxGames.ViewModel.Game
             _api.Reset();
 
             _api.StartReactionTimingGame();
+        }
+
+        protected override void AbortGame()
+        {
+            GameState = GameStateEnum.Waiting;
         }
 
         private void _api_GameDone(object? sender, GameDoneEventArgs e)
@@ -50,25 +54,6 @@ namespace BuzzBoxGames.ViewModel.Game
         private void _api_GameStarted(object? sender, EventArgs e)
         {
             GameState = GameStateEnum.Started;
-        }
-
-        private void _api_ReadThreadDisconnection(object? sender, DisconnectionEventArgs e)
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                const string errMsg = "Quiz box has disconnected, cancelling game...";
-
-                if (MessageBoxService != null)
-                {
-                    MessageBoxService.ShowError(errMsg);
-                }
-                else
-                {
-                    throw new InvalidOperationException(errMsg);
-                }
-
-                GameState = GameStateEnum.Waiting;
-            });
         }
 
         #region Commands

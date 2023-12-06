@@ -21,7 +21,6 @@ namespace BuzzBoxGames.ViewModel.Game
         public SimonSays()
         {
             _api.BuzzIn += _api_BuzzIn;
-            _api.ReadThreadDisconnection += _api_ReadThreadDisconnection;
         }
 
         protected override void ResetGame()
@@ -36,6 +35,11 @@ namespace BuzzBoxGames.ViewModel.Game
             _repeatCurrentSequenceIndex = null;
 
             Score = 0;
+        }
+
+        protected override void AbortGame()
+        {
+            GameState = GameStateEnum.Waiting;
         }
 
         private void _api_BuzzIn(object? sender, BuzzInEventArgs e)
@@ -91,25 +95,6 @@ namespace BuzzBoxGames.ViewModel.Game
                         });
                     }
                 }
-            });
-        }
-
-        private void _api_ReadThreadDisconnection(object? sender, DisconnectionEventArgs e)
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                const string errMsg = "Quiz box has disconnected, cancelling game...";
-
-                if (MessageBoxService != null)
-                {
-                    MessageBoxService.ShowError(errMsg);
-                }
-                else
-                {
-                    throw new InvalidOperationException(errMsg);
-                }
-
-                GameState = GameStateEnum.Waiting;
             });
         }
 

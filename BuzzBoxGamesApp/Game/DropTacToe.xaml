@@ -11,28 +11,6 @@
         <vm:DropTacToe />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
-        <Style x:Key="instructionsBg" TargetType="Border">
-            <Setter Property="Background" Value="#44222222" />
-            <Setter Property="StrokeThickness" Value="0" />
-        </Style>
-
-        <Style x:Key="instructions" TargetType="Label">
-            <Setter Property="TextColor" Value="Orange" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="LineBreakMode" Value="WordWrap" />
-        </Style>
-
-        <Style x:Key="instructionsText" TargetType="Span">
-            <Setter Property="TextColor" Value="Orange" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
-        </Style>
-
-        <Style x:Key="startButton" TargetType="Button">
-            <Setter Property="FontFamily" Value="SuperFresh" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='60', MacCatalyst='77.9'}" />
-        </Style>
-
         <Style x:Key="winner" TargetType="Label">
             <Setter Property="Padding" Value="10" />
             <Setter Property="TextColor" Value="Yellow" />
