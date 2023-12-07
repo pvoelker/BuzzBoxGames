@@ -19,6 +19,13 @@ namespace BuzzBoxGames.ViewModel.Game
             _api.BuzzIn += _api_BuzzIn;
 
             _gameEngine = Factory.CreateNewGame(2, 3, [4, 4]);
+
+            NextRound = new RelayCommand(() =>
+            {
+                EndGame.Execute(null);
+
+                GameState = GameStateEnum.Waiting;
+            });
         }
 
         protected override void ResetGame()
@@ -41,6 +48,8 @@ namespace BuzzBoxGames.ViewModel.Game
             Data_3_3 = TicTacToeEnum.None;
 
             _gameEngine.StartNewGame(_rnd.Next(1) + 1);
+
+            OnGameStateChange();
 
             _api.Reset();
 
@@ -74,22 +83,9 @@ namespace BuzzBoxGames.ViewModel.Game
 
                         SetBoardByPosition(row.Value, col, player);
 
-                        OnPropertyChanged(nameof(Turn));
-                        OnPropertyChanged(nameof(GreenPaddlesTurn));
-                        OnPropertyChanged(nameof(RedPaddlesTurn));
+                        OnGameStateChange();
 
-                        OnPropertyChanged(nameof(HasWinner));
-                        OnPropertyChanged(nameof(Winner));
-                        OnPropertyChanged(nameof(IsGameDraw));
-                        OnPropertyChanged(nameof(AreGreenPaddlesWinner));
-                        OnPropertyChanged(nameof(AreRedPaddlesWinner));
-
-                        if(HasWinner == true)
-                        {
-                            EndGame.Execute(null);
-
-                            GameState = GameStateEnum.Waiting;
-                        }
+                        // Waiting for NextRound commands to continue
                     }
                 }
                 else
@@ -104,6 +100,8 @@ namespace BuzzBoxGames.ViewModel.Game
         #region Commands
 
         public IRelayCommand? InvalidMove { get; set; }
+
+        public IRelayCommand NextRound { get; set; }
 
         #endregion
 
@@ -334,6 +332,19 @@ namespace BuzzBoxGames.ViewModel.Game
             }
 
             return retVal;
+        }
+
+        private void OnGameStateChange()
+        {
+            OnPropertyChanged(nameof(Turn));
+            OnPropertyChanged(nameof(GreenPaddlesTurn));
+            OnPropertyChanged(nameof(RedPaddlesTurn));
+
+            OnPropertyChanged(nameof(HasWinner));
+            OnPropertyChanged(nameof(Winner));
+            OnPropertyChanged(nameof(IsGameDraw));
+            OnPropertyChanged(nameof(AreGreenPaddlesWinner));
+            OnPropertyChanged(nameof(AreRedPaddlesWinner));
         }
 
         static private TicTacToeEnum MapGameEngineIntToEnum(int val)

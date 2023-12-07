@@ -53,7 +53,10 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Style="{StaticResource instructionsText}" Text="Instructions: " FontAttributes="Bold" />
-                            <Span Style="{StaticResource instructionsText}" Text="Green and Red paddles take turns adding their tokens to one of four columns.  If either side gets three in a row, that side wins!" />
+                            <Span Style="{StaticResource instructionsText}" TextColor="DarkGreen" Text="Green (O)" />
+                            <Span Style="{StaticResource instructionsText}" Text=" and " />
+                            <Span Style="{StaticResource instructionsText}" TextColor="DarkRed" Text="Red (X)" />
+                            <Span Style="{StaticResource instructionsText}" Text=" paddles take turns adding their team tokens to one of four labelled columns. If either side gets three in a row, that side wins!" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -125,6 +128,16 @@
             <local:TicTacToeElement Grid.Row="10" Grid.Column="2" Value="{Binding Path=Data_3_1}" />
             <local:TicTacToeElement Grid.Row="10" Grid.Column="4" Value="{Binding Path=Data_3_2}" />
             <local:TicTacToeElement Grid.Row="10" Grid.Column="6" Value="{Binding Path=Data_3_3}" />
+
+            <skia:SKLottieView x:Name="_confetti"  Grid.ColumnSpan="7" Grid.RowSpan="11"
+                Source="cool_fireworks.json"
+                RepeatCount="2"
+                IsAnimationEnabled="{Binding Path=HasWinner}"
+                IsVisible="{Binding Path=HasWinner}"
+                AnimationCompleted="_confetti_AnimationCompleted"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+            </skia:SKLottieView>
         </Grid>
     </Grid>
 </ContentPage>

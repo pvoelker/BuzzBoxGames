@@ -92,8 +92,8 @@
                 <Label Style="{StaticResource instructions}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Style="{StaticResource instructionsText}" Text="Instructions: " FontAttributes="Bold" />
-                            <Span Style="{StaticResource instructionsText}" Text="Press your paddle as quickly as possible when the yellow light on the quiz box comes on!  Reactions times in milliseconds will be shown...." />
+                            <Span Style="{StaticResource instructionsText}" Text="Instructions: " FontAttributes="Bold" />  
+                            <Span Style="{StaticResource instructionsText}" Text="Press your paddle as quickly as possible when the yellow light on the quiz box comes on! Reaction times in milliseconds will be shown. The winner gets a star!" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -129,12 +129,12 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 1" />
             <Image Grid.Row="0" Grid.Column="0" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleRed1Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="0"
+                   Style="{StaticResource paddleRed}"
+                   Text="Red 1" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="0"
                                    Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed1BuzzIn}"
@@ -149,12 +149,12 @@
                 </Label.Text>
             </Label>
 
-            <Label Grid.Row="0" Grid.Column="2"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 2" />
             <Image Grid.Row="0" Grid.Column="2" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleRed2Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="2"
+                   Style="{StaticResource paddleRed}"
+                   Text="Red 2" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="2"
                                    Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed2BuzzIn}"
@@ -169,12 +169,12 @@
                 </Label.Text>
             </Label>
 
-            <Label Grid.Row="0" Grid.Column="4"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 3" />
             <Image Grid.Row="0" Grid.Column="4" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleRed3Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="4"
+                   Style="{StaticResource paddleRed}"
+                   Text="Red 3" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="4"
                                    Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed3BuzzIn}"
@@ -189,12 +189,12 @@
                 </Label.Text>
             </Label>
 
-            <Label Grid.Row="0" Grid.Column="6"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 4" />
             <Image Grid.Row="0" Grid.Column="6" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleRed4Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="6"
+                   Style="{StaticResource paddleRed}"
+                   Text="Red 4" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="6"
                                    Style="{StaticResource scoreBarRed}"
                                    IsVisible="{Binding Path=DidPaddleRed4BuzzIn}"
@@ -209,12 +209,12 @@
                 </Label.Text>
             </Label>
 
-            <Label Grid.Row="0" Grid.Column="8"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 1" />
             <Image Grid.Row="0" Grid.Column="8" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleGreen1Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="8"
+                   Style="{StaticResource paddleGreen}"
+                   Text="Green 1" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="8"
                                    Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen1BuzzIn}"
@@ -229,12 +229,12 @@
                 </Label.Text>
             </Label>
 
-            <Label Grid.Row="0" Grid.Column="10"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 2" />
             <Image Grid.Row="0" Grid.Column="10" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleGreen2Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="10"
+                   Style="{StaticResource paddleGreen}"
+                   Text="Green 2" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="10"
                                    Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen2BuzzIn}"
@@ -249,12 +249,12 @@
                 </Label.Text>
             </Label>
 
-            <Label Grid.Row="0" Grid.Column="12"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 3" />
             <Image Grid.Row="0" Grid.Column="12" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleGreen3Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="12"
+                   Style="{StaticResource paddleGreen}"
+                   Text="Green 3" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="12"
                                    Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen3BuzzIn}"
@@ -269,12 +269,12 @@
                 </Label.Text>
             </Label>
 
-            <Label Grid.Row="0" Grid.Column="14"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 4" />
             <Image Grid.Row="0" Grid.Column="14" Margin="30,0"
                    IsVisible="{Binding Path=IsPaddleGreen4Winner}"
                    Source="star.png" />
+            <Label Grid.Row="0" Grid.Column="14"
+                   Style="{StaticResource paddleGreen}"
+                   Text="Green 4" />
             <local:VerticalDataBar Grid.Row="2" Grid.Column="14"
                                    Style="{StaticResource scoreBarGreen}"
                                    IsVisible="{Binding Path=DidPaddleGreen4BuzzIn}"

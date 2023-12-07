@@ -25,7 +25,7 @@ namespace BuzzBoxGames.ViewModel.Game
                 }
                 else
                 {
-                    const string errMsg = "Unable to connect to a quiz box, unable to start game...";
+                    const string errMsg = "Unable to connect to a quiz box, cannot start game...";
 
                     if (MessageBoxService != null)
                     {

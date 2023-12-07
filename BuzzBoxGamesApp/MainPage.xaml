@@ -80,6 +80,11 @@
                     Style="{StaticResource aboutButton}"
                     Text="About..."
                     Clicked="InfoButton_Clicked" />
+                <Label 
+                    Style="{StaticResource versionText}"
+                    TextColor="Red"
+                    Text="Beta Version"
+                    Margin="10,0,0,0"/>
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </Grid>

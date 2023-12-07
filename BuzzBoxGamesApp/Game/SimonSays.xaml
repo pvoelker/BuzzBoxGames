@@ -64,7 +64,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Style="{StaticResource instructionsText}" Text="Instructions: " FontAttributes="Bold" />
-                            <Span Style="{StaticResource instructionsText}" Text="Repeat the paddle press pattern given. The game starts at one (1) paddle press in the pattern.  Each round another paddle press is added.  The game ends when the first mistake is made." />
+                            <Span Style="{StaticResource instructionsText}" Text="Repeat the paddle press pattern given. The game starts at one (1) paddle press in the pattern.  After each round another paddle press is added.  The game ends when the first mistake is made." />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -162,6 +162,7 @@
             <skia:SKLottieView x:Name="_confetti"  Grid.ColumnSpan="3" Grid.RowSpan="8"
                 Source="confetti.json"
                 IsAnimationEnabled="{Binding Path=CorrectSequence}"
+                AnimationCompleted="_confetti_AnimationCompleted"
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill">
             </skia:SKLottieView>

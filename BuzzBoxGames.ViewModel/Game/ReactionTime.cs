@@ -8,12 +8,9 @@ namespace BuzzBoxGames.ViewModel.Game
     {
         public enum GameStateEnum { Waiting, Started, Done }
 
-        private readonly Random _rnd = new Random();
-
         public ReactionTime()
         {
             _api.GameStarted += _api_GameStarted;
-            _api.GameLightOn += _api_GameLightOn;
             _api.GameDone += _api_GameDone;
         }
 
@@ -77,11 +74,6 @@ namespace BuzzBoxGames.ViewModel.Game
             EndGame.Execute(null);
         }
 
-        private void _api_GameLightOn(object? sender, EventArgs e)
-        {
-            // Nothing implemented yet
-        }
-
         private void _api_GameStarted(object? sender, EventArgs e)
         {
             GameState = GameStateEnum.Started;
@@ -93,7 +85,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         private void _api_BuzzInStats(object? sender, BuzzInStatsEventArgs e)
         {
-            Task.Run(() => _api.Reset());
+            Task.Run(_api.Reset);
         }
 
         private GameStateEnum _gameState = GameStateEnum.Waiting;
@@ -133,7 +125,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleRed1Winner
         {
             get => _isPaddleRed1Winner;
-            set => SetProperty(ref _isPaddleRed1Winner, value);
+            private set => SetProperty(ref _isPaddleRed1Winner, value);
         }
 
         private double? _paddleRed2Time = 0;
@@ -155,7 +147,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleRed2Winner
         {
             get => _isPaddleRed2Winner;
-            set => SetProperty(ref _isPaddleRed2Winner, value);
+            private set => SetProperty(ref _isPaddleRed2Winner, value);
         }
 
         private double? _paddleRed3Time = 0;
@@ -177,7 +169,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleRed3Winner
         {
             get => _isPaddleRed3Winner;
-            set => SetProperty(ref _isPaddleRed3Winner, value);
+            private set => SetProperty(ref _isPaddleRed3Winner, value);
         }
 
         private double? _paddleRed4Time = 0;
@@ -199,7 +191,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleRed4Winner
         {
             get => _isPaddleRed4Winner;
-            set => SetProperty(ref _isPaddleRed4Winner, value);
+            private set => SetProperty(ref _isPaddleRed4Winner, value);
         }
 
         private double? _paddleGreen1Time = 0;
@@ -221,7 +213,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleGreen1Winner
         {
             get => _isPaddleGreen1Winner;
-            set => SetProperty(ref _isPaddleGreen1Winner, value);
+            private set => SetProperty(ref _isPaddleGreen1Winner, value);
         }
 
         private double? _paddleGreen2Time = 0;
@@ -243,7 +235,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleGreen2Winner
         {
             get => _isPaddleGreen2Winner;
-            set => SetProperty(ref _isPaddleGreen2Winner, value);
+            private set => SetProperty(ref _isPaddleGreen2Winner, value);
         }
 
         private double? _paddleGreen3Time = 0;
@@ -265,7 +257,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleGreen3Winner
         {
             get => _isPaddleGreen3Winner;
-            set => SetProperty(ref _isPaddleGreen3Winner, value);
+            private set => SetProperty(ref _isPaddleGreen3Winner, value);
         }
 
         private double? _paddleGreen4Time = 0;
@@ -287,7 +279,7 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool IsPaddleGreen4Winner
         {
             get => _isPaddleGreen4Winner;
-            set => SetProperty(ref _isPaddleGreen4Winner, value);
+            private set => SetProperty(ref _isPaddleGreen4Winner, value);
         }
     }
 }
