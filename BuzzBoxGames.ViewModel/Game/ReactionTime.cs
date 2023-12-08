@@ -8,10 +8,24 @@ namespace BuzzBoxGames.ViewModel.Game
     {
         public enum GameStateEnum { Waiting, Started, Done }
 
+        public List<ReactionTimePaddle> _allPaddles;
+
         public ReactionTime()
         {
             _api.GameStarted += _api_GameStarted;
             _api.GameDone += _api_GameDone;
+
+            _allPaddles =
+            [
+                Red1Paddle,
+                Red2Paddle,
+                Red3Paddle,
+                Red4Paddle,
+                Green1Paddle,
+                Green2Paddle,
+                Green3Paddle,
+                Green4Paddle
+            ];
         }
 
         protected override void ResetGame()
@@ -30,6 +44,11 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             GameState = GameStateEnum.Done;
 
+            foreach (var item in _allPaddles)
+            {
+                item.IsWinner = false;
+            }
+
             Red1Paddle.Time = (double?)e.Red1Time;
             Red2Paddle.Time = (double?)e.Red2Time;
             Red3Paddle.Time = (double?)e.Red3Time;
@@ -40,35 +59,13 @@ namespace BuzzBoxGames.ViewModel.Game
             Green3Paddle.Time = (double?)e.Green3Time;
             Green4Paddle.Time = (double?)e.Green4Time;
 
-            Red1Paddle.IsWinner = false;
-            Red2Paddle.IsWinner = false;
-            Red3Paddle.IsWinner = false;
-            Red4Paddle.IsWinner = false;
+            var bestTime = _allPaddles.MaxBy(x => x.Time)?.Time;
 
-            Green1Paddle.IsWinner = false;
-            Green2Paddle.IsWinner = false;
-            Green3Paddle.IsWinner = false;
-            Green4Paddle.IsWinner = false;
+            var bestTimePlayers = _allPaddles.Where(x => bestTime != null && x.Time == bestTime);
 
-            var timesList = new List<Tuple<Action, double?>>
+            foreach(var item in bestTimePlayers)
             {
-                new(() => { Red1Paddle.IsWinner = true; }, Red1Paddle.Time),
-                new(() => { Red2Paddle.IsWinner = true; }, Red2Paddle.Time),
-                new(() => { Red3Paddle.IsWinner = true; }, Red3Paddle.Time),
-                new(() => { Red4Paddle.IsWinner = true; }, Red4Paddle.Time),
-                new(() => { Green1Paddle.IsWinner = true; }, Green1Paddle.Time),
-                new(() => { Green2Paddle.IsWinner = true; }, Green2Paddle.Time),
-                new(() => { Green3Paddle.IsWinner = true; }, Green3Paddle.Time),
-                new(() => { Green4Paddle.IsWinner = true; }, Green4Paddle.Time)
-            };
-
-            var minTime = timesList.MaxBy(x => x.Item2)?.Item2;
-
-            var minTimePlayers = timesList.Where(x => x.Item2 != null && x.Item2 == minTime).ToList();
-
-            foreach(var item in minTimePlayers)
-            {
-                item.Item1.Invoke();
+                item.IsWinner = true;
             }
 
             EndGame.Execute(null);
@@ -115,7 +112,6 @@ namespace BuzzBoxGames.ViewModel.Game
 
         private readonly ReactionTimePaddle _red4Paddle = new ReactionTimePaddle();
         public ReactionTimePaddle Red4Paddle { get => _red4Paddle; }
-
 
         private readonly ReactionTimePaddle _green1Paddle = new ReactionTimePaddle();
         public ReactionTimePaddle Green1Paddle { get => _green1Paddle; }

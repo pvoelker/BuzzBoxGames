@@ -143,11 +143,8 @@
                                    Max="{Binding Path=Red1Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="0"
                    Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red1Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Red1Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Image Grid.Row="0" Grid.Column="2" Margin="30,0"
                    IsVisible="{Binding Path=Red2Paddle.IsWinner}"
@@ -163,11 +160,8 @@
                                    Max="{Binding Path=Red2Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="2"
                    Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red2Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Red2Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Image Grid.Row="0" Grid.Column="4" Margin="30,0"
                    IsVisible="{Binding Path=Red3Paddle.IsWinner}"
@@ -183,11 +177,8 @@
                                    Max="{Binding Path=Red3Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="4"
                    Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red3Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Red3Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Image Grid.Row="0" Grid.Column="6" Margin="30,0"
                    IsVisible="{Binding Path=Red4Paddle.IsWinner}"
@@ -203,11 +194,8 @@
                                    Max="{Binding Path=Red4Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="6"
                    Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red4Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Red4Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Image Grid.Row="0" Grid.Column="8" Margin="30,0"
                    IsVisible="{Binding Path=Green1Paddle.IsWinner}"
@@ -223,11 +211,8 @@
                                    Max="{Binding Path=Green1Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="8"
                    Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green1Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Green1Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Image Grid.Row="0" Grid.Column="10" Margin="30,0"
                    IsVisible="{Binding Path=Green2Paddle.IsWinner}"
@@ -243,11 +228,8 @@
                                    Max="{Binding Path=Green2Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="10"
                    Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green2Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Green2Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Image Grid.Row="0" Grid.Column="12" Margin="30,0"
                    IsVisible="{Binding Path=Green3Paddle.IsWinner}"
@@ -263,11 +245,8 @@
                                    Max="{Binding Path=Green3Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="12"
                    Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green3Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Green3Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Image Grid.Row="0" Grid.Column="14" Margin="30,0"
                    IsVisible="{Binding Path=Green4Paddle.IsWinner}"
@@ -283,11 +262,8 @@
                                    Max="{Binding Path=Green4Paddle.MaxTime}"/>
             <Label Grid.Row="2" Grid.Column="14"
                    Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green4Paddle.NotBuzzedIn}">
-                <Label.Text>
-                    No Buzz In
-                </Label.Text>
-            </Label>
+                   IsVisible="{Binding Path=Green4Paddle.NotBuzzedIn}"
+                   Text="No Buzz In" />
 
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="15"
                     Style="{StaticResource resetButton}"

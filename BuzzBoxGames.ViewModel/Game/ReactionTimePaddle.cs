@@ -1,17 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuzzBoxGames.ViewModel.Game
 {
+    /// <summary>
+    /// Represents a paddle on the reaction time game
+    /// </summary>
     public class ReactionTimePaddle : ObservableObject
     {
-        public double MaxTime { get => 1000; }
+        static public double MaxTime { get => 1000; }
 
-        private double? _time = 0;
+        private double? _time = null;
         public double? Time
         {
             get => _time;

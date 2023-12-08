@@ -8,6 +8,8 @@ namespace BuzzBoxGames.ViewModel.Game
 {
     public class DropTacToe : BaseGame
     {
+        private const int GRID_SIZE = 4;
+
         public enum GameStateEnum { Waiting, Started }
 
         private readonly Random _rnd = new Random();
@@ -18,7 +20,7 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             _api.BuzzIn += _api_BuzzIn;
 
-            _gameEngine = Factory.CreateNewGame(2, 3, [4, 4]);
+            _gameEngine = Factory.CreateNewGame(2, 3, [GRID_SIZE, GRID_SIZE]);
 
             NextRound = new RelayCommand(() =>
             {
@@ -85,7 +87,14 @@ namespace BuzzBoxGames.ViewModel.Game
 
                         OnGameStateChange();
 
-                        // Waiting for NextRound commands to continue
+                        if (MapGameEngineIntToEnum(_gameEngine.Winner) == TicTacToeEnum.None)
+                        {
+                            NextRound.Execute(null);
+                        }
+                        else
+                        {
+                            // Waiting for NextRound commands to continue
+                        }
                     }
                 }
                 else
@@ -141,7 +150,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         public bool HasWinner
         {
-            get { return _gameEngine.IsGameFinished; }
+            get { return _gameEngine.IsGameFinished && MapGameEngineIntToEnum(_gameEngine.Winner) != TicTacToeEnum.None ; }
         }
 
         public TicTacToeEnum Winner
@@ -164,7 +173,7 @@ namespace BuzzBoxGames.ViewModel.Game
         /// <summary>
         /// First dimension are rows, the second dimension are columns
         /// </summary>
-        private TicTacToeEnum[,] _data = new TicTacToeEnum[4, 4];
+        private TicTacToeEnum[,] _data = new TicTacToeEnum[GRID_SIZE, GRID_SIZE];
         public TicTacToeEnum Data_0_0
         {
             get => _data[0, 0];
@@ -322,7 +331,7 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             int? retVal = null;
 
-            for(int i = 3; i >= 0; i--)
+            for(int i = GRID_SIZE - 1; i >= 0; i--)
             {
                 if (_data[i, column] == TicTacToeEnum.None)
                 {
