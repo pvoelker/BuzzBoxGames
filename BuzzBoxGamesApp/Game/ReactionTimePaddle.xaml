@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BuzzBoxGamesApp.Game.ReactionTimePaddle">
+    <ContentView.Resources>
+        <Style x:Key="scoreBar" TargetType="local:VerticalDataBar">
+            <Setter Property="FontFamily" Value="OpenSansSemibold" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='36', MacCatalyst='46.8'}" />
+            <Setter Property="Background" Value="#55FFFFFF" />
+            <Setter Property="Bar">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Color="Orange"
+                          Offset="0.1" />
+                        <GradientStop Color="DarkOrange"
+                          Offset="1.0" />
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="noBuzzIn" TargetType="Label">
+            <Setter Property="Background" Value="Gray" />
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Opacity" Value="0.75" />
+        </Style>
+    </ContentView.Resources>
+    <Grid x:Name="_grid">
+        <local:VerticalDataBar Style="{StaticResource scoreBar}"
+                               TextColor="{Binding Path=BarTextColor, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
+                               IsVisible="{Binding Path=Value.BuzzedIn, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
+                               Text="{Binding Path=Value.Time, StringFormat='{0:0} ms', Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
+                               Value="{Binding Path=Value.Score, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
+                               Max="{Binding Path=Value.MaxTime, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"/>
+        <Label Style="{StaticResource noBuzzIn}"
+               TextColor="{Binding Path=TextColor, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
+               IsVisible="{Binding Path=Value.NotBuzzedIn, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
+               Text="No Buzz In" />
+    </Grid>
+</ContentView>

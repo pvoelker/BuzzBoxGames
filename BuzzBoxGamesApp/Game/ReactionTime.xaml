@@ -11,67 +11,6 @@
         <vm:ReactionTime />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
-        <Style x:Key="paddle" TargetType="Label">
-            <Setter Property="FontFamily" Value="SuperFresh" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='42', MacCatalyst='54.5'}" />
-            <Setter Property="HorizontalOptions" Value="Center" />
-            <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="Shadow">
-                <Shadow Brush="Black" Offset="0,0" Radius="5" Opacity="1.0" />
-            </Setter>
-        </Style>
-
-        <Style x:Key="paddleGreen" TargetType="Label" BasedOn="{StaticResource paddle}">
-            <Setter Property="TextColor" Value="LightGreen" />
-        </Style>
-
-        <Style x:Key="paddleRed" TargetType="Label" BasedOn="{StaticResource paddle}">
-            <Setter Property="TextColor" Value="Red" />
-        </Style>
-        
-        <Style x:Key="scoreBar" TargetType="local:VerticalDataBar">
-            <Setter Property="FontFamily" Value="OpenSansSemibold" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='36', MacCatalyst='46.8'}" />
-            <Setter Property="Background" Value="#55FFFFFF" />
-            <Setter Property="Bar">
-                <Setter.Value>
-                    <LinearGradientBrush EndPoint="1,0">
-                        <GradientStop Color="Orange"
-                          Offset="0.1" />
-                        <GradientStop Color="DarkOrange"
-                          Offset="1.0" />
-                    </LinearGradientBrush>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="scoreBarGreen" TargetType="local:VerticalDataBar" BasedOn="{StaticResource scoreBar}">
-            <Setter Property="TextColor" Value="Green" />
-        </Style>
-
-        <Style x:Key="scoreBarRed" TargetType="local:VerticalDataBar" BasedOn="{StaticResource scoreBar}">
-            <Setter Property="TextColor" Value="DarkRed" />
-        </Style>
-
-        <Style x:Key="noBuzzIn" TargetType="Label">
-            <Setter Property="Background" Value="Gray" />
-            <Setter Property="FontFamily" Value="SuperFresh" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
-            <Setter Property="HorizontalOptions" Value="Fill" />
-            <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="Opacity" Value="0.75" />
-        </Style>
-
-        <Style x:Key="noBuzzInGreen" TargetType="Label" BasedOn="{StaticResource noBuzzIn}">
-            <Setter Property="TextColor" Value="LightGreen" />
-        </Style>
-
-        <Style x:Key="noBuzzInRed" TargetType="Label" BasedOn="{StaticResource noBuzzIn}">
-            <Setter Property="TextColor" Value="Red" />
-        </Style>
-
         <Style x:Key="preGameInstructions" TargetType="Label">
             <Setter Property="Background" Value="#CC222222" />
             <Setter Property="FontFamily" Value="SuperFresh" />
@@ -129,141 +68,69 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Row="0" Grid.Column="0" Margin="30,0"
-                   IsVisible="{Binding Path=Red1Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="0"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 1" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="0"
-                                   Style="{StaticResource scoreBarRed}"
-                                   IsVisible="{Binding Path=Red1Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Red1Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Red1Paddle.Score}"
-                                   Max="{Binding Path=Red1Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="0"
-                   Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red1Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="0"
+                                           Value="{Binding Path=Red1Paddle}"
+                                           TextColor="Red" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="0"
+                                      Value="{Binding Path=Red1Paddle}"
+                                      TextColor="Red"
+                                      BarTextColor="DarkRed" />
 
-            <Image Grid.Row="0" Grid.Column="2" Margin="30,0"
-                   IsVisible="{Binding Path=Red2Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="2"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 2" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="2"
-                                   Style="{StaticResource scoreBarRed}"
-                                   IsVisible="{Binding Path=Red2Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Red2Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Red2Paddle.Score}"
-                                   Max="{Binding Path=Red2Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="2"
-                   Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red2Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="2"
+                                           Value="{Binding Path=Red2Paddle}"
+                                           TextColor="Red" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="2"
+                                      Value="{Binding Path=Red2Paddle}"
+                                      TextColor="Red"
+                                      BarTextColor="DarkRed" />
 
-            <Image Grid.Row="0" Grid.Column="4" Margin="30,0"
-                   IsVisible="{Binding Path=Red3Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="4"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 3" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="4"
-                                   Style="{StaticResource scoreBarRed}"
-                                   IsVisible="{Binding Path=Red3Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Red3Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Red3Paddle.Score}"
-                                   Max="{Binding Path=Red3Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="4"
-                   Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red3Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="4"
+                                           Value="{Binding Path=Red3Paddle}"
+                                           TextColor="Red" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="4"
+                                      Value="{Binding Path=Red3Paddle}"
+                                      TextColor="Red"
+                                      BarTextColor="DarkRed" />
 
-            <Image Grid.Row="0" Grid.Column="6" Margin="30,0"
-                   IsVisible="{Binding Path=Red4Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="6"
-                   Style="{StaticResource paddleRed}"
-                   Text="Red 4" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="6"
-                                   Style="{StaticResource scoreBarRed}"
-                                   IsVisible="{Binding Path=Red4Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Red4Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Red4Paddle.Score}"
-                                   Max="{Binding Path=Red4Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="6"
-                   Style="{StaticResource noBuzzInRed}"
-                   IsVisible="{Binding Path=Red4Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="6"
+                                           Value="{Binding Path=Red4Paddle}"
+                                           TextColor="Red" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="6"
+                                      Value="{Binding Path=Red4Paddle}"
+                                      TextColor="Red"
+                                      BarTextColor="DarkRed" />
 
-            <Image Grid.Row="0" Grid.Column="8" Margin="30,0"
-                   IsVisible="{Binding Path=Green1Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="8"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 1" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="8"
-                                   Style="{StaticResource scoreBarGreen}"
-                                   IsVisible="{Binding Path=Green1Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Green1Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Green1Paddle.Score}"
-                                   Max="{Binding Path=Green1Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="8"
-                   Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green1Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="8"
+                                           Value="{Binding Path=Green1Paddle}"
+                                           TextColor="LightGreen" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="8"
+                                      Value="{Binding Path=Green1Paddle}"
+                                      TextColor="LightGreen"
+                                      BarTextColor="Green" />
 
-            <Image Grid.Row="0" Grid.Column="10" Margin="30,0"
-                   IsVisible="{Binding Path=Green2Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="10"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 2" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="10"
-                                   Style="{StaticResource scoreBarGreen}"
-                                   IsVisible="{Binding Path=Green2Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Green2Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Green2Paddle.Score}"
-                                   Max="{Binding Path=Green2Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="10"
-                   Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green2Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="10"
+                                           Value="{Binding Path=Green2Paddle}"
+                                           TextColor="LightGreen" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="10"
+                                      Value="{Binding Path=Green2Paddle}"
+                                      TextColor="LightGreen"
+                                      BarTextColor="Green" />
 
-            <Image Grid.Row="0" Grid.Column="12" Margin="30,0"
-                   IsVisible="{Binding Path=Green3Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="12"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 3" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="12"
-                                   Style="{StaticResource scoreBarGreen}"
-                                   IsVisible="{Binding Path=Green3Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Green3Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Green3Paddle.Score}"
-                                   Max="{Binding Path=Green3Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="12"
-                   Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green3Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="12"
+                                           Value="{Binding Path=Green3Paddle}"
+                                           TextColor="LightGreen" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="12"
+                                      Value="{Binding Path=Green3Paddle}"
+                                      TextColor="LightGreen"
+                                      BarTextColor="Green" />
 
-            <Image Grid.Row="0" Grid.Column="14" Margin="30,0"
-                   IsVisible="{Binding Path=Green4Paddle.IsWinner}"
-                   Source="star.png" />
-            <Label Grid.Row="0" Grid.Column="14"
-                   Style="{StaticResource paddleGreen}"
-                   Text="Green 4" />
-            <local:VerticalDataBar Grid.Row="2" Grid.Column="14"
-                                   Style="{StaticResource scoreBarGreen}"
-                                   IsVisible="{Binding Path=Green4Paddle.BuzzedIn}"
-                                   Text="{Binding Path=Green4Paddle.Time, StringFormat='{0:0} ms' }"
-                                   Value="{Binding Path=Green4Paddle.Score}"
-                                   Max="{Binding Path=Green4Paddle.MaxTime}"/>
-            <Label Grid.Row="2" Grid.Column="14"
-                   Style="{StaticResource noBuzzInGreen}"
-                   IsVisible="{Binding Path=Green4Paddle.NotBuzzedIn}"
-                   Text="No Buzz In" />
+            <local:ReactionTimePaddleLabel Grid.Row="0" Grid.Column="14"
+                                           Value="{Binding Path=Green4Paddle}"
+                                           TextColor="LightGreen" />
+            <local:ReactionTimePaddle Grid.Row="2" Grid.Column="14"
+                                      Value="{Binding Path=Green4Paddle}"
+                                      TextColor="LightGreen"
+                                      BarTextColor="Green" />
 
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="15"
                     Style="{StaticResource resetButton}"

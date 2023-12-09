@@ -101,28 +101,28 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool GameIsStarted { get => _gameState == GameStateEnum.Started; }
         public bool GameIsDone { get => _gameState == GameStateEnum.Done; }
 
-        private readonly ReactionTimePaddle _red1Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _red1Paddle = new ReactionTimePaddle("Red 1");
         public ReactionTimePaddle Red1Paddle { get => _red1Paddle; }
 
-        private readonly ReactionTimePaddle _red2Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _red2Paddle = new ReactionTimePaddle("Red 2");
         public ReactionTimePaddle Red2Paddle { get => _red2Paddle; }
 
-        private readonly ReactionTimePaddle _red3Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _red3Paddle = new ReactionTimePaddle("Red 3");
         public ReactionTimePaddle Red3Paddle { get => _red3Paddle; }
 
-        private readonly ReactionTimePaddle _red4Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _red4Paddle = new ReactionTimePaddle("Red 4");
         public ReactionTimePaddle Red4Paddle { get => _red4Paddle; }
 
-        private readonly ReactionTimePaddle _green1Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _green1Paddle = new ReactionTimePaddle("Green 1");
         public ReactionTimePaddle Green1Paddle { get => _green1Paddle; }
 
-        private readonly ReactionTimePaddle _green2Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _green2Paddle = new ReactionTimePaddle("Green 2");
         public ReactionTimePaddle Green2Paddle { get => _green2Paddle; }
 
-        private readonly ReactionTimePaddle _green3Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _green3Paddle = new ReactionTimePaddle("Green 3");
         public ReactionTimePaddle Green3Paddle { get => _green3Paddle; }
 
-        private readonly ReactionTimePaddle _green4Paddle = new ReactionTimePaddle();
+        private readonly ReactionTimePaddle _green4Paddle = new ReactionTimePaddle("Green 4");
         public ReactionTimePaddle Green4Paddle { get => _green4Paddle; }
     }
 }

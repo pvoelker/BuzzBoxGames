@@ -8,7 +8,18 @@ namespace BuzzBoxGames.ViewModel.Game
     /// </summary>
     public class ReactionTimePaddle : ObservableObject
     {
-        static public double MaxTime { get => 1000; }
+        public ReactionTimePaddle(string paddleName)
+        {
+            _paddleName = paddleName;
+        }
+
+        public double MaxTime { get => 1000; }
+
+        private readonly string _paddleName;
+        public string PaddleName
+        {
+            get => _paddleName;
+        }
 
         private double? _time = null;
         public double? Time

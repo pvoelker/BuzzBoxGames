@@ -90,6 +90,12 @@
 	  <Compile Update="Game\DropTacToe.xaml.cs">
 	    <DependentUpon>DropTacToe.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Game\ReactionTimePaddleLabel.xaml.cs">
+	    <DependentUpon>ReactionTimePaddleLabel.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Game\ReactionTimePaddle.xaml.cs">
+	    <DependentUpon>ReactionTimePaddle.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Game\TicTacToeElement.xaml.cs">
 	    <DependentUpon>TicTacToeElement.xaml</DependentUpon>
 	  </Compile>
@@ -103,6 +109,12 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Game\DropTacToe.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Game\ReactionTimePaddleLabel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Game\ReactionTimePaddle.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Game\TicTacToeElement.xaml">
