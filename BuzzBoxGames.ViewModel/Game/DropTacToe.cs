@@ -87,7 +87,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
                         OnGameStateChange();
 
-                        if (MapGameEngineIntToEnum(_gameEngine.Winner) == TicTacToeEnum.None)
+                        if (MapGameEngineIntToEnum(_gameEngine.Winner) != TicTacToeEnum.None)
                         {
                             NextRound.Execute(null);
                         }
