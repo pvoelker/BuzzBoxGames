@@ -112,26 +112,26 @@
                    Style="{StaticResource paddleNum}"
                    Text="Paddle 4" />
 
-            <local:TicTacToeElement Grid.Row="4" Grid.Column="0" Value="{Binding Path=Data_0_0}" />
-            <local:TicTacToeElement Grid.Row="4" Grid.Column="2" Value="{Binding Path=Data_0_1}" />
-            <local:TicTacToeElement Grid.Row="4" Grid.Column="4" Value="{Binding Path=Data_0_2}" />
-            <local:TicTacToeElement Grid.Row="4" Grid.Column="6" Value="{Binding Path=Data_0_3}" />
-            <local:TicTacToeElement Grid.Row="6" Grid.Column="0" Value="{Binding Path=Data_1_0}" />
-            <local:TicTacToeElement Grid.Row="6" Grid.Column="2" Value="{Binding Path=Data_1_1}" />
-            <local:TicTacToeElement Grid.Row="6" Grid.Column="4" Value="{Binding Path=Data_1_2}" />
-            <local:TicTacToeElement Grid.Row="6" Grid.Column="6" Value="{Binding Path=Data_1_3}" />
-            <local:TicTacToeElement Grid.Row="8" Grid.Column="0" Value="{Binding Path=Data_2_0}" />
-            <local:TicTacToeElement Grid.Row="8" Grid.Column="2" Value="{Binding Path=Data_2_1}" />
-            <local:TicTacToeElement Grid.Row="8" Grid.Column="4" Value="{Binding Path=Data_2_2}" />
-            <local:TicTacToeElement Grid.Row="8" Grid.Column="6" Value="{Binding Path=Data_2_3}" />
-            <local:TicTacToeElement Grid.Row="10" Grid.Column="0" Value="{Binding Path=Data_3_0}" />
-            <local:TicTacToeElement Grid.Row="10" Grid.Column="2" Value="{Binding Path=Data_3_1}" />
-            <local:TicTacToeElement Grid.Row="10" Grid.Column="4" Value="{Binding Path=Data_3_2}" />
-            <local:TicTacToeElement Grid.Row="10" Grid.Column="6" Value="{Binding Path=Data_3_3}" />
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="0" Value="{Binding Path=Data_0_0.Value}" IsWinner="{Binding Path=Data_0_0.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="2" Value="{Binding Path=Data_0_1.Value}" IsWinner="{Binding Path=Data_0_1.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="4" Value="{Binding Path=Data_0_2.Value}" IsWinner="{Binding Path=Data_0_2.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="4" Grid.Column="6" Value="{Binding Path=Data_0_3.Value}" IsWinner="{Binding Path=Data_0_3.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="0" Value="{Binding Path=Data_1_0.Value}" IsWinner="{Binding Path=Data_1_0.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="2" Value="{Binding Path=Data_1_1.Value}" IsWinner="{Binding Path=Data_1_1.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="4" Value="{Binding Path=Data_1_2.Value}" IsWinner="{Binding Path=Data_1_2.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="6" Grid.Column="6" Value="{Binding Path=Data_1_3.Value}" IsWinner="{Binding Path=Data_1_3.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="0" Value="{Binding Path=Data_2_0.Value}" IsWinner="{Binding Path=Data_2_0.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="2" Value="{Binding Path=Data_2_1.Value}" IsWinner="{Binding Path=Data_2_1.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="4" Value="{Binding Path=Data_2_2.Value}" IsWinner="{Binding Path=Data_2_2.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="8" Grid.Column="6" Value="{Binding Path=Data_2_3.Value}" IsWinner="{Binding Path=Data_2_3.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="0" Value="{Binding Path=Data_3_0.Value}" IsWinner="{Binding Path=Data_3_0.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="2" Value="{Binding Path=Data_3_1.Value}" IsWinner="{Binding Path=Data_3_1.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="4" Value="{Binding Path=Data_3_2.Value}" IsWinner="{Binding Path=Data_3_2.IsWinner}" />
+            <local:TicTacToeElement Grid.Row="10" Grid.Column="6" Value="{Binding Path=Data_3_3.Value}" IsWinner="{Binding Path=Data_3_3.IsWinner}" />
 
             <skia:SKLottieView x:Name="_confetti"  Grid.ColumnSpan="7" Grid.RowSpan="11"
                 Source="cool_fireworks.json"
-                RepeatCount="2"
+                RepeatCount="3"
                 IsAnimationEnabled="{Binding Path=HasWinner}"
                 IsVisible="{Binding Path=HasWinner}"
                 AnimationCompleted="_confetti_AnimationCompleted"

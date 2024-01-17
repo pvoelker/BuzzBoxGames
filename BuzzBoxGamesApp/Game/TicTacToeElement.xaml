@@ -8,6 +8,7 @@
             x:DataType="local:TicTacToeElement"
             Background="{Binding Path=Background, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}"
             Stroke="Black"
+            StrokeThickness="3"
             VerticalOptions="Fill">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="2" />
@@ -19,6 +20,10 @@
                 <DataTrigger TargetType="Border" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=Value}" Value="O">
                     <Setter Property="Background" Value="{Binding Path=OBackground, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}" />
                 </DataTrigger>
+                <DataTrigger TargetType="Border" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=IsWinner}" Value="true">
+                    <Setter Property="Stroke" Value="{Binding Path=WinnerColor, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}" />
+                    <Setter Property="StrokeThickness" Value="6" />
+                </DataTrigger>
             </Border.Triggers>
             <Label
                 FontFamily="OpenSansSemibold"
@@ -29,6 +34,9 @@
                 VerticalOptions="Center"
                 HorizontalTextAlignment="Center">
                 <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=IsWinner}" Value="true">
+                        <Setter Property="TextColor" Value="{Binding Path=WinnerColor, Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay}" />
+                    </DataTrigger>
                     <DataTrigger TargetType="Label" Binding="{Binding Source={RelativeSource AncestorType={x:Type local:TicTacToeElement}}, Mode=OneWay, Path=Value}" Value="X">
                         <Setter Property="Text" Value="X" />
                     </DataTrigger>
