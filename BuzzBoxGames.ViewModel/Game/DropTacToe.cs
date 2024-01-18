@@ -86,39 +86,46 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
-                var player = MapGameEngineIntToEnum(_gameEngine.NextPlayer);
-
-                if (MapPaddleColorToEnum(e.Paddle.Color) == player)
+                if (HasWinner == false)
                 {
-                    var col = (int)e.Paddle.Number - 1;
-                    var row = FindNextRow(col);
+                    var player = MapGameEngineIntToEnum(_gameEngine.NextPlayer);
 
-                    if (row == null)
+                    if (MapPaddleColorToEnum(e.Paddle.Color) == player)
                     {
-                        InvalidMove?.Execute(null);
-                    }
-                    else
-                    {
-                        var success = _gameEngine.MakeMoveByPosition([row.Value, col]);
-                        Debug.Assert(success == true, "The tic-tac-toe move should never fail");
+                        var col = (int)e.Paddle.Number - 1;
+                        var row = FindNextRow(col);
 
-                        SetValueBoardByPosition(row.Value, col, player);
-
-                        OnGameStateChange();
-
-                        if (MapGameEngineIntToEnum(_gameEngine.Winner) != TicTacToeEnum.None)
+                        if (row == null)
                         {
-                            // Wait for animation to complete and reset the game
+                            InvalidMove?.Execute(null);
                         }
                         else
                         {
-                            // Waiting for NextRound commands to continue
+                            var success = _gameEngine.MakeMoveByPosition([row.Value, col]);
+                            Debug.Assert(success == true, "The tic-tac-toe move should never fail");
+
+                            SetValueBoardByPosition(row.Value, col, player);
+
+                            OnGameStateChange();
+
+                            if (MapGameEngineIntToEnum(_gameEngine.Winner) != TicTacToeEnum.None)
+                            {
+                                // Wait for animation to complete and reset the game
+                            }
+                            else
+                            {
+                                // Waiting for NextRound commands to continue
+                            }
                         }
+                    }
+                    else
+                    {
+                        InvalidMove?.Execute(null);
                     }
                 }
                 else
                 {
-                    InvalidMove?.Execute(null);
+                    // If game has a winner, ignore buzz ins
                 }
 
                 _api.Reset();
