@@ -41,13 +41,13 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<AssemblyName>JBQQuizMe</AssemblyName>
+		<AssemblyName>BuzzBoxGames</AssemblyName>
 		<Authors>Paul Voelker</Authors>
 		<PublisherName>Paul Voelker</PublisherName>
 		<Title>Buzz Box Games</Title>
 		<Product>Buzz Box Games</Product>
 		<Description>A collection of games to play using Brian's Boxes quizzing sets</Description>
-		<Copyright>Copyright © 2023 Paul Voelker</Copyright>
+		<Copyright>Copyright © 2024 Paul Voelker</Copyright>
 		<DefaultLanguage>en</DefaultLanguage>
 	</PropertyGroup>
 

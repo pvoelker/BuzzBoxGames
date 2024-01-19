@@ -26,5 +26,21 @@ namespace BuzzBoxGames.ViewModel
                 }
             }
         }
+
+        /// <summary>
+        /// Iterate over all elements of a 2D array using the given action
+        /// </summary>
+        /// <typeparam name="T">The data type in the array</typeparam>
+        /// <param name="array">The array to iterate over</param>
+        public static void ForEach<T>(T[,] array, Action<T> action)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                for (int j = 0; j < array.GetLength(1); j++)
+                {
+                    action.Invoke(array[i, j]);
+                }
+            }
+        }
     }
 }

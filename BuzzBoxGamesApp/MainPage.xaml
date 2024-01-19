@@ -28,6 +28,16 @@
             </Setter>
         </Style>
 
+        <Style x:Key="additionalInfo" TargetType="Label">
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='32', MacCatalyst='45.7'}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="Shadow">
+                <Shadow Brush="White" Offset="0,0" Radius="20" Opacity="1.0" />
+            </Setter>
+        </Style>
+
         <Style x:Key="aboutButton" TargetType="Button">
             <Setter Property="TextColor" Value="{StaticResource White}" />
             <Setter Property="Background" Value="Orange" />
@@ -68,6 +78,8 @@
                     Style="{StaticResource gameButton}"
                     Text="Drop-Tac-Toe" />
 
+            <Label Style="{StaticResource additionalInfo}">Requires a Brian's Quiz Box to be connected using USB</Label>
+            
             <HorizontalStackLayout
                 Margin="10"
                 HorizontalOptions="Center">
