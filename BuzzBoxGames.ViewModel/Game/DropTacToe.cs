@@ -68,7 +68,8 @@ namespace BuzzBoxGames.ViewModel.Game
             Data_3_2.IsWinner = false;
             Data_3_3.IsWinner = false;
 
-            _gameEngine.StartNewGame(_rnd.Next(1) + 1);
+            var firstPlayer = (_rnd.Next(1000) > 500) ? 1 : 2; // PEV - 1/21/2024 - Randomizing on small numbers does not seen to work well
+            _gameEngine.StartNewGame(firstPlayer);
 
             OnGameStateChange();
 
@@ -111,10 +112,12 @@ namespace BuzzBoxGames.ViewModel.Game
                             if (MapGameEngineIntToEnum(_gameEngine.Winner) != TicTacToeEnum.None)
                             {
                                 // Wait for animation to complete and reset the game
+                                WinningMove?.Execute(null);
                             }
                             else
                             {
                                 // Waiting for NextRound commands to continue
+                                ValidMove?.Execute(null);
                             }
                         }
                     }
@@ -134,7 +137,11 @@ namespace BuzzBoxGames.ViewModel.Game
 
         #region Commands
 
+        public IRelayCommand? ValidMove { get; set; }
+
         public IRelayCommand? InvalidMove { get; set; }
+
+        public IRelayCommand? WinningMove { get; set; }
 
         public IRelayCommand NextRound { get; set; }
 

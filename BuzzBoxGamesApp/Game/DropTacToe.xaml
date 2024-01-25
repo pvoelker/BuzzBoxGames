@@ -35,7 +35,7 @@
 
         <Style x:Key="paddleNum" TargetType="Label">
             <Setter Property="FontFamily" Value="Stepalange" />
-            <Setter Property="TextColor" Value="OrangeRed" />
+            <Setter Property="TextColor" Value="WhiteSmoke" />
             <Setter Property="Background" Value="#99272727" />
             <Setter Property="FontSize" Value="{OnPlatform Default='37', MacCatalyst='46.8'}" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -44,6 +44,8 @@
     </ContentPage.Resources>
     <ContentPage.Behaviors>
         <b:TicTacToeInvalidMove SoundName="wrong_buzzer.mp3" />
+        <b:TicTacToeValidMove SoundName="ding.mp3" />
+        <b:TicTacToeWinningMove SoundName="fanfare.mp3" />
     </ContentPage.Behaviors>
     <Grid>
         <Image Source="bricks_background.jpg" Aspect="AspectFill" />

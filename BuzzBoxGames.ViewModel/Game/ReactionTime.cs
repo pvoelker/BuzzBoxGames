@@ -59,7 +59,7 @@ namespace BuzzBoxGames.ViewModel.Game
             Green3Paddle.Time = (double?)e.Green3Time;
             Green4Paddle.Time = (double?)e.Green4Time;
 
-            var bestTime = _allPaddles.MaxBy(x => x.Time)?.Time;
+            var bestTime = _allPaddles.MinBy(x => x.Time)?.Time;
 
             var bestTimePlayers = _allPaddles.Where(x => bestTime != null && x.Time == bestTime);
 
@@ -77,6 +77,8 @@ namespace BuzzBoxGames.ViewModel.Game
         }
 
         #region Commands
+
+        public IRelayCommand? GameDone { get; set; }
 
         #endregion
 

@@ -28,6 +28,8 @@
 
     <Style x:Key="startButton" TargetType="Button">
         <Setter Property="FontFamily" Value="SuperFresh" />
+        <Setter Property="Background" Value="DarkBlue" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="FontSize" Value="{OnPlatform Default='60', MacCatalyst='77.9'}" />
     </Style>
 

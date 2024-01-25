@@ -1,8 +1,8 @@
 # Buzz Box Games
 
-## Games
+A collection of simple games that can be played using a Brian's Quiz Box set via a USB connection.  It is a way to get new quizzers used to buzzing in on paddles and provides a way for quizzers to relax and take a break during practices.
 
-A collection of simple games that can be played using a Brian's Quiz Box set using a USB connection.  It is a way to get new quizzers used to buzzing in on paddles and provides a way for quizzers to relax and take a break during practices.
+## Games
 
 - **Simon Says** - Players repeat the given random pattern of buzzer paddle presses.  After each round the sequence grows.
 - **Reaction Time** - Players see who can press their buzzer paddle the fastest.
