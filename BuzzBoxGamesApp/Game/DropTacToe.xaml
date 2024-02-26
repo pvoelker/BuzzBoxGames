@@ -47,7 +47,7 @@
         <b:TicTacToeValidMove SoundName="ding.mp3" />
         <b:TicTacToeWinningMove SoundName="fanfare.mp3" />
     </ContentPage.Behaviors>
-    <Grid>
+    <Grid x:DataType="vm:DropTacToe">
         <Image Source="bricks_background.jpg" Aspect="AspectFill" />
         <VerticalStackLayout IsVisible="{Binding Path=GameIsWaiting}">
             <Border Style="{StaticResource instructionsBg}">

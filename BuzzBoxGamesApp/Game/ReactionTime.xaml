@@ -24,7 +24,7 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-    <Grid>
+    <Grid x:DataType="vm:ReactionTime">
         <Image Source="grass_background.jpg" Aspect="AspectFill" />
         <VerticalStackLayout IsVisible="{Binding Path=GameIsWaiting}">
             <Border Style="{StaticResource instructionsBg}">

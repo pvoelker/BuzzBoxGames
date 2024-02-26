@@ -21,20 +21,6 @@ namespace BuzzBoxGames.ViewModel.Game
         public SimonSays()
         {
             _api.BuzzIn += _api_BuzzIn;
-        }
-
-        protected override void ResetGame()
-        {
-            _sequence.Clear();
-            _sequence.Add(GetRandomPaddle());
-
-            PlaySequence();
-
-            GameState = GameStateEnum.Started;
-
-            _repeatCurrentSequenceIndex = null;
-
-            Score = 0;
 
             NextSequence = new RelayCommand(() =>
             {
@@ -49,6 +35,20 @@ namespace BuzzBoxGames.ViewModel.Game
 
                 PlaySequence();
             });
+        }
+
+        protected override void ResetGame()
+        {
+            _sequence.Clear();
+            _sequence.Add(GetRandomPaddle());
+
+            PlaySequence();
+
+            GameState = GameStateEnum.Started;
+
+            _repeatCurrentSequenceIndex = null;
+
+            Score = 0;
         }
 
         protected override void AbortGame()

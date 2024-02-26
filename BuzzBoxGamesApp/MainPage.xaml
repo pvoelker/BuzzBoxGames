@@ -56,7 +56,7 @@
             <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
     </ContentPage.Resources>
-    <Grid>
+    <Grid x:DataType="vm:MainMenu">
         <Image Source="sky_background.jpg" Aspect="AspectFill" />
         <Grid>
             <Grid.RowDefinitions>

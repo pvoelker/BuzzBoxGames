@@ -16,7 +16,7 @@ Always make sure to update the dotnet workloads:
 # Updating Copyright
 
 - Update copyright in BuzzBoxGamesApp project file
-- Update copyright information in 'Info.plist' for MacCatalyst platform
+- Update copyright information in 'Info.plist' for MacCatalyst platform. VALIDATE IF NEEDED???
 
 # Building
 
@@ -28,4 +28,4 @@ Always make sure to update the dotnet workloads:
 - Make sure that 'Package.appxmanifest' is updated with the correct version
 
 ### 64-bit Windows
-> dotnet publish -f net7.0-windows10.0.19041.0 -c Release /p:RuntimeIdentifierOverride=win10-x64
+> dotnet publish -f net8.0-windows10.0.19041.0 -c Release /p:RuntimeIdentifierOverride=win10-x64

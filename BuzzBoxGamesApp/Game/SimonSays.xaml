@@ -56,7 +56,7 @@
     <ContentPage.Behaviors>
         <b:WrongPaddlePress SoundName="wrong_buzzer.mp3" />
     </ContentPage.Behaviors>
-    <Grid>
+    <Grid x:DataType="vm:SimonSays">
         <Image Source="rocks_background.jpg" Aspect="AspectFill" />
         <VerticalStackLayout IsVisible="{Binding Path=GameIsWaiting}">
             <Border Style="{StaticResource instructionsBg}">
