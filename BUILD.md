@@ -10,6 +10,7 @@ Always make sure to update the dotnet workloads:
 - Update 'AssemblyVersion'
 - Update 'FileVersion'
 - Update 'ApplicationDisplayVersion'
+- In 'Package.appxmanifest' for Windows platform, update 'Version' in 'Identity'
 - Document new version in 'CHANGELOG.md'
 
 # Updating Copyright
