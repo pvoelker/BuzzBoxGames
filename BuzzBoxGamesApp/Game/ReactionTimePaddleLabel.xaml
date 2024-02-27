@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
+             xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BuzzBoxGamesApp.Game.ReactionTimePaddleLabel">
+    <ContentView.Resources>
+        <Style x:Key="paddle" TargetType="Label">
+            <Setter Property="FontFamily" Value="SuperFresh" />
+            <Setter Property="FontSize" Value="{OnPlatform Default='42', MacCatalyst='54.5'}" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Shadow">
+                <Shadow Brush="Black" Offset="0,0" Radius="5" Opacity="1.0" />
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+    <Grid x:Name="_grid">
+        <Image Margin="30,0"
+               IsVisible="{Binding Path=Value.IsWinner, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddleLabel}}, Mode=OneWay}"
+               Source="star.png" />
+        <Label Style="{StaticResource paddle}"
+               TextColor="{Binding Path=TextColor, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddleLabel}}, Mode=OneWay}"
+               Text="{Binding Path=Value.PaddleName, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddleLabel}}, Mode=OneWay}" />
+    </Grid>
+</ContentView>

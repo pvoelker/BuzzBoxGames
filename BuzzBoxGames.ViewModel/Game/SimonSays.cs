@@ -21,7 +21,20 @@ namespace BuzzBoxGames.ViewModel.Game
         public SimonSays()
         {
             _api.BuzzIn += _api_BuzzIn;
-            _api.ReadThreadDisconnection += _api_ReadThreadDisconnection;
+
+            NextSequence = new RelayCommand(() =>
+            {
+                _repeatCurrentSequenceIndex = null;
+
+                _sequence.Add(GetRandomPaddle());
+
+                if (Score != null)
+                {
+                    Score = Score.Value + 1;
+                }
+
+                PlaySequence();
+            });
         }
 
         protected override void ResetGame()
@@ -36,6 +49,11 @@ namespace BuzzBoxGames.ViewModel.Game
             _repeatCurrentSequenceIndex = null;
 
             Score = 0;
+        }
+
+        protected override void AbortGame()
+        {
+            GameState = GameStateEnum.Waiting;
         }
 
         private void _api_BuzzIn(object? sender, BuzzInEventArgs e)
@@ -58,16 +76,11 @@ namespace BuzzBoxGames.ViewModel.Game
                             }
                             else
                             {
-                                _repeatCurrentSequenceIndex = null;
+                                CorrectSequence = true;
 
-                                _sequence.Add(GetRandomPaddle());
+                                InGameInstructions = "Good job! Keep going...";
 
-                                if (Score != null)
-                                {
-                                    Score = Score.Value + 1;
-                                }
-
-                                PlaySequence();
+                                // Wait for NextSequence to be called
                             }
 
                             _api.Reset();
@@ -94,26 +107,9 @@ namespace BuzzBoxGames.ViewModel.Game
             });
         }
 
-        private void _api_ReadThreadDisconnection(object? sender, DisconnectionEventArgs e)
-        {
-            MainThread.BeginInvokeOnMainThread(() =>
-            {
-                const string errMsg = "Quiz box has disconnected, cancelling game...";
-
-                if (MessageBoxService != null)
-                {
-                    MessageBoxService.ShowError(errMsg);
-                }
-                else
-                {
-                    throw new InvalidOperationException(errMsg);
-                }
-
-                GameState = GameStateEnum.Waiting;
-            });
-        }
-
         #region Commands
+
+        public IRelayCommand NextSequence { get; set; }
 
         public IRelayCommand? WrongPaddlePress { get; set; }
 
@@ -208,8 +204,17 @@ namespace BuzzBoxGames.ViewModel.Game
             private set => SetProperty(ref _paddleGreen4Lit, value);
         }
 
+        private bool _correctSequence = false;
+        public bool CorrectSequence
+        {
+            get => _correctSequence;
+            private set => SetProperty(ref _correctSequence, value);
+        }
+
         private void PlaySequence()
         {
+            CorrectSequence = false;
+
             var _ = Task.Run(async () =>
             {
                 InGameInstructions = "Listen for the pattern...";

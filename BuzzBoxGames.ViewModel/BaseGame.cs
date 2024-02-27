@@ -15,6 +15,8 @@ namespace BuzzBoxGames.ViewModel.Game
 
         public BaseGame()
         {
+            _api.DisconnectionDetected += _api_DisconnectionDetected;
+
             StartGame = new RelayCommand(() =>
             {
                 if (_api.Connect())
@@ -23,7 +25,7 @@ namespace BuzzBoxGames.ViewModel.Game
                 }
                 else
                 {
-                    const string errMsg = "Unable to connect to quiz box, unable to start game...";
+                    const string errMsg = "Unable to connect to a quiz box, cannot start game...";
 
                     if (MessageBoxService != null)
                     {
@@ -49,10 +51,34 @@ namespace BuzzBoxGames.ViewModel.Game
             });
         }
 
+        private void _api_DisconnectionDetected(object? sender, DisconnectionEventArgs e)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                const string errMsg = "Quiz box has been disconnected, cancelling game...";
+
+                if (MessageBoxService != null)
+                {
+                    MessageBoxService.ShowError(errMsg);
+                }
+                else
+                {
+                    throw new InvalidOperationException(errMsg);
+                }
+
+                AbortGame();
+            });
+        }
+
         /// <summary>
         /// Reset game states
         /// </summary>
         protected abstract void ResetGame();
+
+        /// <summary>
+        /// Abort game
+        /// </summary>
+        protected abstract void AbortGame();
 
         #region Commands
 

@@ -30,7 +30,6 @@
             Margin="5"
             TextColor="{Binding Path=TextColor, Source={RelativeSource AncestorType={x:Type local:VerticalDataBar}}, Mode=OneWay}"
             VerticalOptions="Center"
-            HorizontalTextAlignment="Center"
-            Rotation="-90"/>
+            HorizontalTextAlignment="Center"/>
     </Grid>
 </ContentView>

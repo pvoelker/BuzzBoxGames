@@ -19,12 +19,20 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BriansUsbQuizBoxApi" Version="1.0.0-beta.2" />
+		<PackageReference Include="BriansUsbQuizBoxApi" Version="1.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="Kaszub09.TicTacToe.Game" Version="1.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.3" />
-		<PackageReference Include="Plugin.Maui.Audio" Version="2.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
+		<PackageReference Include="Plugin.Maui.Audio" Version="2.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Platforms\Android\" />
+	  <Folder Include="Platforms\iOS\" />
+	  <Folder Include="Platforms\MacCatalyst\" />
+	  <Folder Include="Platforms\Tizen\" />
+	  <Folder Include="Platforms\Windows\" />
 	</ItemGroup>
 
 </Project>

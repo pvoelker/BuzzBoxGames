@@ -21,13 +21,15 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>BuzzBoxGamesApp</ApplicationTitle>
+		<ApplicationTitle>Buzz Box Games</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>paulvoelker.buzzboxgamesapp</ApplicationId>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
+		<FileVersion>1.0.0.0</FileVersion>		
+		<ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
@@ -38,16 +40,31 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<AssemblyName>BuzzBoxGames</AssemblyName>
+		<Authors>Paul Voelker</Authors>
+		<PublisherName>Paul Voelker</PublisherName>
+		<Title>Buzz Box Games</Title>
+		<Product>Buzz Box Games</Product>
+		<Description>A collection of games to play using Brian's Boxes quizzing sets</Description>
+		<Copyright>Copyright © 2024 Paul Voelker</Copyright>
+		<DefaultLanguage>en</DefaultLanguage>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
+		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+		<PackageCertificateThumbprint>8fd9f7c803428d3d12ff9586e0a5dcf9f0f7424f</PackageCertificateThumbprint>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\buzzboxgamesicon.svg" Color="#00FF0000" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\buzzboxgameslogo.svg" Color="#512BD4" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
@@ -57,10 +74,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="3.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.3" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.3" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="3.0.1" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.86" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -70,6 +88,12 @@
 	<ItemGroup>
 	  <Compile Update="Game\DropTacToe.xaml.cs">
 	    <DependentUpon>DropTacToe.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Game\ReactionTimePaddleLabel.xaml.cs">
+	    <DependentUpon>ReactionTimePaddleLabel.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Game\ReactionTimePaddle.xaml.cs">
+	    <DependentUpon>ReactionTimePaddle.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Game\TicTacToeElement.xaml.cs">
 	    <DependentUpon>TicTacToeElement.xaml</DependentUpon>
@@ -86,6 +110,12 @@
 	  <MauiXaml Update="Game\DropTacToe.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Game\ReactionTimePaddleLabel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Game\ReactionTimePaddle.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Game\TicTacToeElement.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -96,6 +126,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Game\SimonSays.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\SharedStyles.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

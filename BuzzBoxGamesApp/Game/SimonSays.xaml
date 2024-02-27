@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:BuzzBoxGames.ViewModel.Game;assembly=BuzzBoxGames.ViewModel"
              xmlns:local="clr-namespace:BuzzBoxGamesApp.Game"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
              x:Class="BuzzBoxGamesApp.Game.SimonSays"
              x:DataType="vm:SimonSays"
              Title="Simon Says"
@@ -51,33 +52,11 @@
             <Setter Property="HorizontalTextAlignment" Value="Center" />
             <Setter Property="LineBreakMode" Value="WordWrap" />
         </Style>
-
-        <Style x:Key="instructionsBg" TargetType="Border">
-            <Setter Property="Background" Value="#99272727" />
-            <Setter Property="StrokeThickness" Value="0" />
-        </Style>
-
-        <Style x:Key="instructions" TargetType="Label">
-            <Setter Property="TextColor" Value="Orange" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="LineBreakMode" Value="WordWrap" />
-        </Style>
-
-        <Style x:Key="instructionsText" TargetType="Span">
-            <Setter Property="TextColor" Value="Orange" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
-        </Style>
-
-        <Style x:Key="startButton" TargetType="Button">
-            <Setter Property="FontFamily" Value="SuperFresh" />
-            <Setter Property="FontSize" Value="{OnPlatform Default='60', MacCatalyst='77.9'}" />
-        </Style>
     </ContentPage.Resources>
     <ContentPage.Behaviors>
         <b:WrongPaddlePress SoundName="wrong_buzzer.mp3" />
     </ContentPage.Behaviors>
-    <Grid>
+    <Grid x:DataType="vm:SimonSays">
         <Image Source="rocks_background.jpg" Aspect="AspectFill" />
         <VerticalStackLayout IsVisible="{Binding Path=GameIsWaiting}">
             <Border Style="{StaticResource instructionsBg}">
@@ -85,7 +64,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Style="{StaticResource instructionsText}" Text="Instructions: " FontAttributes="Bold" />
-                            <Span Style="{StaticResource instructionsText}" Text="Repeat the paddle press pattern given. The game starts at one (1) paddle press in the pattern.  Each round another paddle press is added.  The game ends when the first mistake is made." />
+                            <Span Style="{StaticResource instructionsText}" Text="Repeat the paddle press pattern given. The game starts at one (1) paddle press in the pattern.  After each round another paddle press is added.  The game ends when the first mistake is made." />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -129,7 +108,7 @@
                 <local:GlowBlock.Behaviors>
                     <b:GlowBlockPlaySound SoundName="beep_d4.wav" />
                 </local:GlowBlock.Behaviors>
-            </local:GlowBlock>            
+            </local:GlowBlock>
             <local:GlowBlock Grid.Column="0" Grid.Row="5"
                              Text="Paddle 3"
                              Style="{StaticResource greenPaddleLight}"
@@ -137,7 +116,7 @@
                 <local:GlowBlock.Behaviors>
                     <b:GlowBlockPlaySound SoundName="beep_e4.wav" />
                 </local:GlowBlock.Behaviors>
-            </local:GlowBlock>            
+            </local:GlowBlock>
             <local:GlowBlock Grid.Column="0" Grid.Row="7"
                              Text="Paddle 4"
                              Style="{StaticResource greenPaddleLight}"
@@ -145,7 +124,7 @@
                 <local:GlowBlock.Behaviors>
                     <b:GlowBlockPlaySound SoundName="beep_f4.wav" />
                 </local:GlowBlock.Behaviors>
-            </local:GlowBlock>            
+            </local:GlowBlock>
 
             <local:GlowBlock Grid.Column="2" Grid.Row="1"
                              Text="Paddle 1"
@@ -179,6 +158,15 @@
                     <b:GlowBlockPlaySound SoundName="beep_c5.wav" />
                 </local:GlowBlock.Behaviors>
             </local:GlowBlock>
+
+            <skia:SKLottieView x:Name="_confetti"  Grid.ColumnSpan="3" Grid.RowSpan="8"
+                Source="confetti.json"
+                RepeatCount="0"
+                IsAnimationEnabled="{Binding Path=CorrectSequence}"
+                AnimationCompleted="_confetti_AnimationCompleted"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+            </skia:SKLottieView>
         </Grid>
     </Grid>
 </ContentPage>

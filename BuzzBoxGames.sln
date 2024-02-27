@@ -3,9 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34302.71
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuzzBoxGamesApp", "BuzzBoxGamesApp\BuzzBoxGamesApp.csproj", "{7577671C-8988-49F9-9232-6A2DEA91E8B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuzzBoxGamesApp", "BuzzBoxGamesApp\BuzzBoxGamesApp.csproj", "{7577671C-8988-49F9-9232-6A2DEA91E8B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuzzBoxGames.ViewModel", "BuzzBoxGames.ViewModel\BuzzBoxGames.ViewModel.csproj", "{3785AEEF-30A3-4813-AA2B-0E96B71D365D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuzzBoxGames.ViewModel", "BuzzBoxGames.ViewModel\BuzzBoxGames.ViewModel.csproj", "{3785AEEF-30A3-4813-AA2B-0E96B71D365D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C85E046F-36AD-45B9-9EE9-6D5CC3F6B065}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		BUILD.md = BUILD.md
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
