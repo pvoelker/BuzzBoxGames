@@ -2,6 +2,8 @@
 
 A collection of simple games that can be played using a Brian's Quiz Box set via a USB connection.  It is a way to get new quizzers used to buzzing in on paddles and provides a way for quizzers to relax and take a break during practices.
 
+Project website with download links: https://pvoelker.github.io/BuzzBoxGames/
+
 ## Games
 
 - **Simon Says** - Players repeat the given random pattern of buzzer paddle presses.  After each round the sequence grows.
