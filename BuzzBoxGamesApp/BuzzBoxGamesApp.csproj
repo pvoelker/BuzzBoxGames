@@ -51,17 +51,29 @@
 		<DefaultLanguage>en</DefaultLanguage>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="$(TargetFramework.Contains('-maccatalyst')) and '$(Configuration)' == 'Release'">
+		<CodesignKey>Developer ID Application: Paul Voelker (3LHZQRQA4Q)</CodesignKey>
+		<CodesignEntitlements>Platforms\MacCatalyst\Entitlements.plist</CodesignEntitlements>
+		<CodesignProvision>Buzz Box Games (MacOS Catalyst Non-App Store)</CodesignProvision>
+		<CreatePackage>true</CreatePackage>
+		<EnableCodeSigning>true</EnableCodeSigning>
+		<EnablePackageSigning>true</EnablePackageSigning>
+		<MtouchLink>SdkOnly</MtouchLink>
+		<PackageSigningKey>Developer ID Installer: Paul Voelker (3LHZQRQA4Q)</PackageSigningKey>
+		<UseHardenedRuntime>true</UseHardenedRuntime>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
 		<AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
 		<PackageCertificateThumbprint>8fd9f7c803428d3d12ff9586e0a5dcf9f0f7424f</PackageCertificateThumbprint>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\buzzboxgamesicon.svg" Color="#00FF0000" />
+		<!-- App Icon (renamed from appicon.svg) -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\buzzboxgamesicon.svg" Color="#A0A0A0" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\buzzboxgameslogo.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\buzzboxgameslogo.svg" Color="#A0A0A0" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -133,4 +145,10 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<!-- PEV  - 3/7/2024 - Since we are distributing the Mac Catalyst build outside of the app store -->
+	<Target Name="_SkipCodesignVerify" BeforeTargets="_CodesignVerify" AfterTargets="_CodesignAppBundle">  
+		<PropertyGroup>    
+			<_RequireCodeSigning>false</_RequireCodeSigning>  
+		</PropertyGroup>
+	</Target>
 </Project>
