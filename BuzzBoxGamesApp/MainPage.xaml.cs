@@ -6,22 +6,46 @@ namespace BuzzBoxGamesApp
     {
         public MainPage()
         {
+# if DEBUG
+            System.Diagnostics.Debug.WriteLine("DEBUG: macOS Input Monitoring Warning setting reset");
+            Preferences.Default.Set(BuzzBoxGames.ViewModel.PreferenceKeys.ShowMacOSInputMonitoringWarning, true);
+# endif
+
             InitializeComponent();
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Game.SimonSays());
+            await Navigation.PushAsync(GetNextPage(new Game.SimonSays()));
         }
 
         private async void Button2_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Game.ReactionTime());
+            await Navigation.PushAsync(GetNextPage(new Game.ReactionTime()));
         }
 
         private async void Button3_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Game.DropTacToe());
+            await Navigation.PushAsync(GetNextPage(new Game.DropTacToe()));
+        }
+
+        private static ContentPage GetNextPage(ContentPage gamePage)
+        {
+            if (DeviceInfo.Current.Platform == DevicePlatform.MacCatalyst)
+            {
+                if(Preferences.Default.Get(BuzzBoxGames.ViewModel.PreferenceKeys.ShowMacOSInputMonitoringWarning, true))
+                {
+                    return new InputMonitoringWarnPage(gamePage);
+                }
+                else
+                {
+                    return gamePage;
+                }
+            }
+            else
+            {
+                return gamePage;
+            }            
         }
 
         private async void InfoButton_Clicked(object sender, EventArgs e)
