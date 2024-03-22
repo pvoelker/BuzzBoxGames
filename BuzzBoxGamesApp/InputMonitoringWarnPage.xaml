@@ -51,10 +51,10 @@
             </LinearGradientBrush>
         </VerticalStackLayout.Background>   
         <Label Style="{StaticResource noticeTitleText}"
-                Text="Notice:"
-                Margin="10"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+               Text="Notice:"
+               Margin="10"
+               VerticalOptions="Center"
+               HorizontalOptions="Center" />
         <Label Style="{StaticResource instructions}" Margin="10">
             <Label.FormattedText>
                 <FormattedString>
@@ -65,7 +65,7 @@
                     <Span Style="{StaticResource noticeText}" Text=".  Buzz Box Games does " />  
                     <Span Style="{StaticResource noticeText}" Text="not" FontAttributes="Bold" />  
                     <Span Style="{StaticResource noticeText}" Text=" monitor keyboard inputs and keyboard monitoring is not required to run this application." />  
-              </FormattedString>
+                </FormattedString>
             </Label.FormattedText>
         </Label>
         <Button Style="{StaticResource continueButton}"
