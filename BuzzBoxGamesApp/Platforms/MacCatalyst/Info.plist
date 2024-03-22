@@ -13,7 +13,7 @@
 	<string>public.app-category.games</string>
 
 	<key>NSHumanReadableCopyright</key>
-	<string>Buzz Box Games © 2024</string>
+	<string>Copyright © 2024 Paul Voelker</string>
 
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

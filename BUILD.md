@@ -22,7 +22,7 @@ Always make sure to update the dotnet workloads:
 # Updating Copyright
 
 - Update copyright in BuzzBoxGamesApp project file
-- Update copyright information in 'Info.plist' for MacCatalyst platform. VALIDATE IF NEEDED???
+- Update copyright information in 'Info.plist' for MacCatalyst platform.
 
 # Building
 
