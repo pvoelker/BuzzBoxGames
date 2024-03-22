@@ -8,9 +8,11 @@ public partial class SimonSays : ContentPage
 {
     private static SKLottieImageSourceConverter _lottieConverter = new SKLottieImageSourceConverter();
 
-    public SimonSays()
+    public SimonSays(bool autoRestart)
 	{
 		InitializeComponent();
+
+        BindingContext = new BuzzBoxGames.ViewModel.Game.SimonSays(autoRestart);
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.SimonSays context)
         {

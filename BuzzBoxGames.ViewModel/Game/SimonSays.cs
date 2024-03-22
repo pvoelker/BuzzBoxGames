@@ -18,7 +18,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         private readonly List<Paddle> _allPaddles = [Paddle.RED_1, Paddle.RED_2, Paddle.RED_3, Paddle.RED_4, Paddle.GREEN_1, Paddle.GREEN_2, Paddle.GREEN_3, Paddle.GREEN_4];
 
-        public SimonSays()
+        public SimonSays(bool autoRestart) : base(autoRestart)
         {
             _api.BuzzIn += _api_BuzzIn;
 

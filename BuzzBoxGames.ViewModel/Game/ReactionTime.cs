@@ -10,7 +10,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         public List<ReactionTimePaddle> _allPaddles;
 
-        public ReactionTime()
+        public ReactionTime(bool autoRestart) : base(autoRestart)
         {
             _api.GameStarted += _api_GameStarted;
             _api.GameDone += _api_GameDone;

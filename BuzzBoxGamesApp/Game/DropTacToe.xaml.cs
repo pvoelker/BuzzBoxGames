@@ -8,9 +8,11 @@ public partial class DropTacToe : ContentPage
 {
     private static SKLottieImageSourceConverter _lottieConverter = new SKLottieImageSourceConverter();
 
-    public DropTacToe()
+    public DropTacToe(bool autoRestart)
 	{
 		InitializeComponent();
+
+        BindingContext = new BuzzBoxGames.ViewModel.Game.DropTacToe(autoRestart);
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.DropTacToe context)
         {

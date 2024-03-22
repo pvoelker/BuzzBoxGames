@@ -4,9 +4,11 @@ namespace BuzzBoxGamesApp.Game;
 
 public partial class ReactionTime : ContentPage
 {
-	public ReactionTime()
+	public ReactionTime(bool autoRestart)
 	{
 		InitializeComponent();
+
+        BindingContext = new BuzzBoxGames.ViewModel.Game.ReactionTime(autoRestart);
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.ReactionTime context)
         {

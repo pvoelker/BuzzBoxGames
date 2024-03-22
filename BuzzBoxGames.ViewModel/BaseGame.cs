@@ -13,8 +13,12 @@ namespace BuzzBoxGames.ViewModel.Game
     {
         protected readonly QuizBoxApi _api = new QuizBoxApi(new QuizBoxCoreApi());
 
-        public BaseGame()
+        private IDispatcherTimer? _countdownTimer;
+
+        public BaseGame(bool autoRestart)
         {
+            AutoRestart = autoRestart;
+
             _api.DisconnectionDetected += _api_DisconnectionDetected;
 
             StartGame = new RelayCommand(() =>
@@ -47,8 +51,46 @@ namespace BuzzBoxGames.ViewModel.Game
                     await Task.Delay(50);
 
                     _api.Disconnect();
+
+                    if(AutoRestart)
+                    {
+                        BeginAutoRestart();
+                    }
                 });
             });
+
+            if (Application.Current != null)
+            {
+                _countdownTimer = Application.Current.Dispatcher.CreateTimer();
+                _countdownTimer.Interval = TimeSpan.FromSeconds(1);
+                _countdownTimer.IsRepeating = true;
+                _countdownTimer.Tick += (s, e) =>
+                {
+                    if(RestartCountdown > 0)
+                    {
+                        RestartCountdown--;
+                    }
+                    if(RestartCountdown == 0)
+                    {
+                        if (_countdownTimer != null)
+                        {
+                            _countdownTimer.Stop();
+                        }
+
+                        StartGame.Execute(null);
+                    }
+                };
+            }
+        }
+
+        protected void BeginAutoRestart()
+        {
+            RestartCountdown = 10;
+
+            if (_countdownTimer != null)
+            {
+                _countdownTimer.Start();
+            }
         }
 
         private void _api_DisconnectionDetected(object? sender, DisconnectionEventArgs e)
@@ -93,6 +135,28 @@ namespace BuzzBoxGames.ViewModel.Game
         public IRelayCommand EndGame { get; private set; }
 
         #endregion
+
+        private bool _autoRestart;
+        public bool AutoRestart
+        {
+            get => _autoRestart;
+            private set => SetProperty(ref _autoRestart, value);
+        }
+
+        private int _restartCountdown = 0;
+        public int RestartCountdown
+        {
+            get => _restartCountdown;
+            private set
+            {
+                SetProperty(ref _restartCountdown, value);
+                OnPropertyChanged(nameof(HasRestartCountdown));
+            }
+        }
+        public bool HasRestartCountdown
+        {
+            get => _restartCountdown > 0;
+        }
 
         private IMessageBoxService? _messageBoxService = null;
         /// <summary>

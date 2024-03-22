@@ -26,6 +26,14 @@
         <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
     </Style>
 
+    <Style x:Key="restartCountdown" TargetType="Label">
+        <Setter Property="Margin" Value="5" />
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="LineBreakMode" Value="HeadTruncation" />
+    </Style>
+
     <Style x:Key="startButton" TargetType="Button">
         <Setter Property="FontFamily" Value="SuperFresh" />
         <Setter Property="Background" Value="DarkBlue" />
@@ -36,6 +44,35 @@
     <Style x:Key="resetButton" TargetType="Button">
         <Setter Property="FontFamily" Value="SuperFresh" />
         <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
+    </Style>
+
+    <Style x:Key="switchOption" TargetType="Switch">
+        <Setter Property="OnColor" Value="Orange" />
+        <Setter Property="ThumbColor" Value="White" />
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="OnColor" Value="{StaticResource Gray300}" />
+                            <Setter Property="ThumbColor" Value="{StaticResource Gray300}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="On">
+                        <VisualState.Setters>
+                            <Setter Property="OnColor" Value="DarkOrange" />
+                            <Setter Property="ThumbColor" Value="LightYellow" />
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Off">
+                        <VisualState.Setters>
+                            <Setter Property="ThumbColor" Value="{StaticResource Gray400}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

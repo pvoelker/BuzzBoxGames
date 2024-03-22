@@ -16,17 +16,32 @@ namespace BuzzBoxGamesApp
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(GetNextPage(new Game.SimonSays()));
+            var context = BindingContext as BuzzBoxGames.ViewModel.MainMenu;
+
+            if (context != null)
+            {
+				await Navigation.PushAsync(GetNextPage(new Game.SimonSays()));
+            }
         }
 
         private async void Button2_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(GetNextPage(new Game.ReactionTime()));
+            var context = BindingContext as BuzzBoxGames.ViewModel.MainMenu;
+
+            if (context != null)
+            {
+				await Navigation.PushAsync(GetNextPage(new Game.ReactionTime()));
+            }
         }
 
         private async void Button3_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(GetNextPage(new Game.DropTacToe()));
+            var context = BindingContext as BuzzBoxGames.ViewModel.MainMenu;
+
+            if (context != null)
+            {
+				await Navigation.PushAsync(GetNextPage(new Game.DropTacToe(context.AutoRestart)));
+            }
         }
 
         private static ContentPage GetNextPage(ContentPage gamePage)

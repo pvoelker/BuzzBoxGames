@@ -9,7 +9,7 @@
     Title="Buzz Box Games">
 
     <ShellContent
-        Title="Home"
+        Title="Games Menu"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 

@@ -48,6 +48,13 @@ namespace BuzzBoxGames.ViewModel
             get => Version != null;
         }
 
+        private bool _autoRestart = true;
+        public bool AutoRestart
+        {
+            get => _autoRestart;
+            set => SetProperty(ref _autoRestart, value);
+        }
+
         private Version? _version;
         public Version? Version
         {
