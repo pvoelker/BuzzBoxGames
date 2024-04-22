@@ -20,7 +20,7 @@ namespace BuzzBoxGamesApp
 
             if (context != null)
             {
-				await Navigation.PushAsync(GetNextPage(new Game.SimonSays()));
+				await Navigation.PushAsync(GetNextPage(new Game.SimonSays(context.AutoRestart)));
             }
         }
 
@@ -30,7 +30,7 @@ namespace BuzzBoxGamesApp
 
             if (context != null)
             {
-				await Navigation.PushAsync(GetNextPage(new Game.ReactionTime()));
+				await Navigation.PushAsync(GetNextPage(new Game.ReactionTime(context.AutoRestart)));
             }
         }
 
