@@ -4,7 +4,7 @@ using System;
 
 namespace BuzzBoxGamesApp.Behaviors
 {
-    public class WrongPaddlePress : Behavior<ContentPage>
+    public partial class WrongPaddlePress : Behavior<ContentPage>
     {
         private IAudioPlayer? _audioPlayer = null;
 

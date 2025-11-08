@@ -9,11 +9,13 @@ namespace BuzzBoxGames.ViewModel.Game
     /// <summary>
     /// Base class that implements basic connect/disconnect to a quiz box
     /// </summary>
-    public abstract class BaseGame : ObservableObject
+    public abstract class BaseGame : ObservableObject, IDisposable
     {
         protected readonly QuizBoxApi _api = new QuizBoxApi(new QuizBoxCoreApi());
 
         private IDispatcherTimer? _countdownTimer;
+
+        private bool _disposedValue;
 
         public BaseGame(bool autoRestart)
         {
@@ -25,6 +27,11 @@ namespace BuzzBoxGames.ViewModel.Game
             {
                 if (_api.Connect())
                 {
+                    if (_countdownTimer != null)
+                    {
+                        _countdownTimer.Stop();
+                    }
+
                     ResetGame();
                 }
                 else
@@ -72,11 +79,7 @@ namespace BuzzBoxGames.ViewModel.Game
                     }
                     if(RestartCountdown == 0)
                     {
-                        if (_countdownTimer != null)
-                        {
-                            _countdownTimer.Stop();
-                        }
-
+                        // Note: Countdown timer stopped in 'start game'
                         StartGame.Execute(null);
                     }
                 };
@@ -159,6 +162,7 @@ namespace BuzzBoxGames.ViewModel.Game
         }
 
         private IMessageBoxService? _messageBoxService = null;
+
         /// <summary>
         /// Message box service
         /// </summary>
@@ -167,5 +171,36 @@ namespace BuzzBoxGames.ViewModel.Game
             get => _messageBoxService;
             set => SetProperty(ref _messageBoxService, value);
         }
+
+        #region IDisposable
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    AutoRestart = false;
+
+                    if (_countdownTimer != null)
+                    {
+                        _countdownTimer.Stop();
+                        _countdownTimer = null;
+                    }
+
+                    EndGame.Execute(null);
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

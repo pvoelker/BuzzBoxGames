@@ -35,9 +35,6 @@
                 </Label>
             </Border>
             <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40"  Text="Start Game"/>
-            <Label Style="{StaticResource restartCountdown}"
-                   Text="{Binding Path=RestartCountdown, StringFormat='Game Restarting in {0} seconds...'}"
-                   IsVisible="{Binding Path=HasRestartCountdown}"/>
         </VerticalStackLayout>
         <Grid IsVisible="{Binding Path=GameIsStarted}">
             <Label Style="{StaticResource preGameInstructions}">Wait for the yellow light to come on!</Label>
@@ -139,6 +136,7 @@
                     Command="{Binding Path=StartGame}" />
 
             <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="15"
+                   Style="{StaticResource restartCountdown}"
                    Text="{Binding Path=RestartCountdown, StringFormat='Game Restarting in {0} seconds...'}"
                    IsVisible="{Binding Path=HasRestartCountdown}"/>
         </Grid>

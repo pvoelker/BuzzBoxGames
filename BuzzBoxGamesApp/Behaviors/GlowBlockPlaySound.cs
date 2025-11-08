@@ -4,7 +4,7 @@ using System;
 
 namespace BuzzBoxGamesApp.Behaviors
 {
-    public class GlowBlockPlaySound : Behavior<GlowBlock>
+    public partial class GlowBlockPlaySound : Behavior<GlowBlock>
     {
         private IAudioPlayer? _audioPlayer = null;
 

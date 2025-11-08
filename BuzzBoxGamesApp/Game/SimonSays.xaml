@@ -66,10 +66,10 @@
                     </Label.FormattedText>
                 </Label>
             </Border>
-            <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40"  Text="Start Game"/>
             <Label Style="{StaticResource restartCountdown}"
                    Text="{Binding Path=RestartCountdown, StringFormat='Game Restarting in {0} seconds...'}"
                    IsVisible="{Binding Path=HasRestartCountdown}"/>
+            <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40,10"  Text="Start Game"/>
             <Label Style="{StaticResource score}"  IsVisible="{Binding Path=HasScore}" Text="{Binding Path=Score, StringFormat='Score: {0}'}" />
         </VerticalStackLayout>
         <Grid IsVisible="{Binding Path=GameIsStarted}"  Margin="10">

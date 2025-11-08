@@ -6,9 +6,9 @@ public partial class ReactionTime : ContentPage
 {
 	public ReactionTime(bool autoRestart)
 	{
-		InitializeComponent();
-
         BindingContext = new BuzzBoxGames.ViewModel.Game.ReactionTime(autoRestart);
+        
+        InitializeComponent();
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.ReactionTime context)
         {
@@ -22,7 +22,7 @@ public partial class ReactionTime : ContentPage
 
         if (context != null)
         {
-            //context.EndGame?.Execute(null);
+            context.Dispose();
         }
     }
 }

@@ -4,7 +4,7 @@ using System;
 
 namespace BuzzBoxGamesApp.Behaviors
 {
-    public class TicTacToeWinningMove : Behavior<ContentPage>
+    public partial class TicTacToeWinningMove : Behavior<ContentPage>
     {
         private IAudioPlayer? _audioPlayer = null;
 

@@ -60,10 +60,10 @@
                     </Label.FormattedText>
                 </Label>
             </Border>
-            <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40" Text="Start Game"/>
             <Label Style="{StaticResource restartCountdown}"
                    Text="{Binding Path=RestartCountdown, StringFormat='Game Restarting in {0} seconds...'}"
                    IsVisible="{Binding Path=HasRestartCountdown}"/>
+            <Button Style="{StaticResource startButton}" Command="{Binding Path=StartGame}" Margin="40,10" Text="Start Game"/>
             <Label Style="{StaticResource winner}" IsVisible="{Binding Path=AreGreenPaddlesWinner}">Green paddles are the Winner!</Label>
             <Label Style="{StaticResource winner}" IsVisible="{Binding Path=AreRedPaddlesWinner}">Red paddles are the Winner!</Label>
             <Label Style="{StaticResource winner}" IsVisible="{Binding Path=IsGameDraw}">The match was draw!</Label>

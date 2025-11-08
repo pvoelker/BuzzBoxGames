@@ -28,10 +28,13 @@
 
     <Style x:Key="restartCountdown" TargetType="Label">
         <Setter Property="Margin" Value="5" />
-        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="TextColor" Value="Orange" />
         <Setter Property="FontSize" Value="{OnPlatform Default='48', MacCatalyst='62.3'}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="LineBreakMode" Value="HeadTruncation" />
+        <Setter Property="Shadow">
+            <Shadow Brush="Black" Offset="0,0" Radius="5" Opacity="1.0" />
+        </Setter>
     </Style>
 
     <Style x:Key="startButton" TargetType="Button">
@@ -61,7 +64,7 @@
                     </VisualState>
                     <VisualState x:Name="On">
                         <VisualState.Setters>
-                            <Setter Property="OnColor" Value="DarkOrange" />
+                            <Setter Property="OnColor" Value="Orange" />
                             <Setter Property="ThumbColor" Value="LightYellow" />
                         </VisualState.Setters>
                     </VisualState>

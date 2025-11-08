@@ -10,9 +10,9 @@ public partial class SimonSays : ContentPage
 
     public SimonSays(bool autoRestart)
 	{
-		InitializeComponent();
-
         BindingContext = new BuzzBoxGames.ViewModel.Game.SimonSays(autoRestart);
+        
+        InitializeComponent();
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.SimonSays context)
         {
@@ -26,7 +26,7 @@ public partial class SimonSays : ContentPage
 
         if (context != null)
         {
-            context.EndGame?.Execute(null);
+            context.Dispose();
         }
     }
 

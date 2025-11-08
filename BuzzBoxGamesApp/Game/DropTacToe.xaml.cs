@@ -10,9 +10,9 @@ public partial class DropTacToe : ContentPage
 
     public DropTacToe(bool autoRestart)
 	{
-		InitializeComponent();
-
         BindingContext = new BuzzBoxGames.ViewModel.Game.DropTacToe(autoRestart);
+        
+        InitializeComponent();
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.DropTacToe context)
         {
@@ -26,7 +26,7 @@ public partial class DropTacToe : ContentPage
 
         if (context != null)
         {
-            context.EndGame?.Execute(null);
+            context.Dispose();
         }
     }
 
