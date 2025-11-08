@@ -6,7 +6,7 @@ namespace BuzzBoxGamesApp.Behaviors
 {
     public partial class TicTacToeValidMove : Behavior<ContentPage>
     {
-        private IAudioPlayer? _audioPlayer = null;
+        private AsyncAudioPlayer? _audioPlayer = null;
 
         public static readonly BindableProperty SoundNameProperty =
             BindableProperty.Create(nameof(SoundName), typeof(string), typeof(TicTacToeValidMove), propertyChanged: async (b, o, n) =>
@@ -21,7 +21,7 @@ namespace BuzzBoxGamesApp.Behaviors
 
                     if (n != null)
                     {
-                        bb._audioPlayer = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync((string)n));
+                        bb._audioPlayer = AudioManager.Current.CreateAsyncPlayer(await FileSystem.OpenAppPackageFileAsync((string)n));
                     }
                 }
             });
@@ -38,7 +38,7 @@ namespace BuzzBoxGamesApp.Behaviors
 
             if (context != null)
             {
-                context.ValidMove = new RelayCommand(() =>
+                context.ValidMove = new AsyncRelayCommand(async () =>
                 {
                     if (_audioPlayer != null)
                     {
@@ -47,7 +47,7 @@ namespace BuzzBoxGamesApp.Behaviors
                             _audioPlayer.Stop();
                         }
 
-                        _audioPlayer.Play();
+                        await _audioPlayer.PlayAsync(CancellationToken.None);
                     }
                 });
             }

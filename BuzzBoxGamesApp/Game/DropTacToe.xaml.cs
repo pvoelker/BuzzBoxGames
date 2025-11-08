@@ -24,10 +24,7 @@ public partial class DropTacToe : ContentPage
     {
         var context = BindingContext as BuzzBoxGames.ViewModel.Game.DropTacToe;
 
-        if (context != null)
-        {
-            context.Dispose();
-        }
+        context?.Dispose();
     }
 
     private void _confetti_AnimationCompleted(object sender, EventArgs e)

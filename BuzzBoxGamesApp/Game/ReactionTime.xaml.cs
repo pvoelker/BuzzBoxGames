@@ -18,11 +18,8 @@ public partial class ReactionTime : ContentPage
 
     private void ContentPage_Unloaded(object sender, EventArgs e)
     {
-        var context = BindingContext as BuzzBoxGames.ViewModel.Game.SimonSays;
+        var context = BindingContext as BuzzBoxGames.ViewModel.Game.ReactionTime;
 
-        if (context != null)
-        {
-            context.Dispose();
-        }
+        context?.Dispose();
     }
 }

@@ -249,16 +249,13 @@ namespace BuzzBoxGames.ViewModel.Game
                 }
                 else
                 {
-                    Task.Run(async () => // Need to look into why this is needed
-                    {
-                        _api.Reset(); // Not using 'StopPaddleLockout' as is causes a beep
+                    _api.Reset(); // Not using 'StopPaddleLockout' as is causes a beep
 
-                        InGameInstructions = "Repeat the pattern!";
+                    InGameInstructions = "Repeat the pattern!";
 
-                        _currentSequenceIndex = null;
+                    _currentSequenceIndex = null;
 
-                        _repeatCurrentSequenceIndex = 0;
-                    });
+                    _repeatCurrentSequenceIndex = 0;
                 }
             }
             else

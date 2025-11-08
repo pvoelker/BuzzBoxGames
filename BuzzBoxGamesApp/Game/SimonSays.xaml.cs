@@ -24,10 +24,7 @@ public partial class SimonSays : ContentPage
     {
         var context = BindingContext as BuzzBoxGames.ViewModel.Game.SimonSays;
 
-        if (context != null)
-        {
-            context.Dispose();
-        }
+        context?.Dispose();
     }
 
     private void _confetti_AnimationCompleted(object sender, EventArgs e)
