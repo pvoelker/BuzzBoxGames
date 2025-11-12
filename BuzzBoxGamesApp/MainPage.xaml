@@ -56,6 +56,10 @@
             <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
 
+        <Style x:Key="betaText" BasedOn="{StaticResource versionText}" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
         <Style x:Key="autoRestartText" TargetType="Label">
             <Setter Property="TextColor" Value="DarkBlue" />
             <Setter Property="FontFamily" Value="OpenSansRegular" />
@@ -138,6 +142,9 @@
                 <Label Style="{StaticResource versionText}"
                        IsVisible="{Binding Path=IsVersionInfoPresent}"
                        Text="{Binding Path=Version, StringFormat='Version {0}'}"
+                       Margin="0,0,10,0"/>
+                <Label Style="{StaticResource betaText}"
+                       Text="This is a beta version. Do not redistribute!"
                        Margin="0,0,10,0"/>
                 <Button Style="{StaticResource aboutButton}"
                         Text="About..."
