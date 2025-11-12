@@ -6,14 +6,9 @@ namespace BuzzBoxGamesApp.Services
     /// <summary>
     /// Message box service
     /// </summary>
-    public class MessageBoxService : IMessageBoxService
+    public class MessageBoxService(Page page) : IMessageBoxService
     {
-        private Page _page;
-
-        public MessageBoxService(Page page)
-        {
-            _page = page;
-        }
+        private readonly Page _page = page;
 
         /// <inheritdoc />
         public void ShowError(string message)

@@ -4,7 +4,7 @@ using System;
 
 namespace BuzzBoxGames.ViewModel.Game
 {
-    public class ReactionTime : BaseGame
+    public partial class ReactionTime : BaseGame
     {
         public enum GameStateEnum { Waiting, Started, Done }
 

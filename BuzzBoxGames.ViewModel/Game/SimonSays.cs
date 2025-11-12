@@ -4,13 +4,13 @@ using System;
 
 namespace BuzzBoxGames.ViewModel.Game
 {
-    public class SimonSays : BaseGame
+    public partial class SimonSays : BaseGame
     {
         public enum GameStateEnum { Waiting, Started }
 
         private readonly Random _rnd = new();
 
-        private readonly List<Paddle> _sequence = new();
+        private readonly List<Paddle> _sequence = [];
 
         private int? _currentSequenceIndex = null;
 

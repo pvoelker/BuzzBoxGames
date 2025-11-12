@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace BuzzBoxGames.ViewModel
 {
-    public class MainMenu : ObservableValidator
+    public partial class MainMenu : ObservableValidator
     {
         public MainMenu()
         {

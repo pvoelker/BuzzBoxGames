@@ -11,7 +11,7 @@ namespace BuzzBoxGames.ViewModel.Game
     /// </summary>
     public abstract class BaseGame : ObservableObject, IDisposable
     {
-        protected readonly QuizBoxApi _api = new QuizBoxApi(new QuizBoxCoreApi());
+        protected readonly QuizBoxApi _api = new(new QuizBoxCoreApi());
 
         private IDispatcherTimer? _countdownTimer;
 
@@ -27,10 +27,7 @@ namespace BuzzBoxGames.ViewModel.Game
             {
                 if (_api.Connect())
                 {
-                    if (_countdownTimer != null)
-                    {
-                        _countdownTimer.Stop();
-                    }
+                    _countdownTimer?.Stop();
 
                     ResetGame();
                 }
@@ -90,10 +87,7 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             RestartCountdown = 10;
 
-            if (_countdownTimer != null)
-            {
-                _countdownTimer.Start();
-            }
+            _countdownTimer?.Start();
         }
 
         private void _api_DisconnectionDetected(object? sender, DisconnectionEventArgs e)

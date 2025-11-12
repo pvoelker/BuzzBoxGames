@@ -6,16 +6,11 @@ namespace BuzzBoxGames.ViewModel.Game
     /// <summary>
     /// Represents a paddle on the reaction time game
     /// </summary>
-    public class ReactionTimePaddle : ObservableObject
+    public partial class ReactionTimePaddle(string paddleName) : ObservableObject
     {
-        public ReactionTimePaddle(string paddleName)
-        {
-            _paddleName = paddleName;
-        }
+        public static double MaxTime { get => 1000; }
 
-        public double MaxTime { get => 1000; }
-
-        private readonly string _paddleName;
+        private readonly string _paddleName = paddleName;
         public string PaddleName
         {
             get => _paddleName;
@@ -33,7 +28,7 @@ namespace BuzzBoxGames.ViewModel.Game
                 OnPropertyChanged(nameof(NotBuzzedIn));
             }
         }
-        public double? Score { get => MaxTime - _time; }
+        public double? Score { get => ReactionTimePaddle.MaxTime - _time; }
         public bool BuzzedIn { get => _time != null; }
         public bool NotBuzzedIn { get => _time == null; }
 

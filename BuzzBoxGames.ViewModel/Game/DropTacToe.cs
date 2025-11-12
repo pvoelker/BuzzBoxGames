@@ -6,13 +6,13 @@ using TicTacToe.Game;
 
 namespace BuzzBoxGames.ViewModel.Game
 {
-    public class DropTacToe : BaseGame
+    public partial class DropTacToe : BaseGame
     {
         private const int GRID_SIZE = 4;
 
         public enum GameStateEnum { Waiting, Started }
 
-        private readonly Random _rnd = new Random();
+        private readonly Random _rnd = new();
 
         private readonly IMultiGame _gameEngine;
 
@@ -209,7 +209,7 @@ namespace BuzzBoxGames.ViewModel.Game
         /// <summary>
         /// First dimension are rows, the second dimension are columns
         /// </summary>
-        private DropTacToeSquare[,] _data = new DropTacToeSquare[GRID_SIZE, GRID_SIZE];
+        private readonly DropTacToeSquare[,] _data = new DropTacToeSquare[GRID_SIZE, GRID_SIZE];
         public DropTacToeSquare Data_0_0
         {
             get => _data[0, 0];
