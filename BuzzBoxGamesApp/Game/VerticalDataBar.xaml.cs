@@ -20,7 +20,7 @@ public partial class VerticalDataBar : ContentView
 
         if (gb != null)
         {
-            gb.InvalidateLayout();
+            gb.InvalidateMeasure();
         }
     });
     public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(double), typeof(VerticalDataBar), 7.5, propertyChanged: (bindable, oldValue, newValue) =>
@@ -29,7 +29,7 @@ public partial class VerticalDataBar : ContentView
 
         if (gb != null)
         {
-            gb.InvalidateLayout();
+            gb.InvalidateMeasure();
         }
     });
 

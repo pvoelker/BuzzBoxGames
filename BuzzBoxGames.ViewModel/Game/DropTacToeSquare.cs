@@ -6,7 +6,7 @@ namespace BuzzBoxGames.ViewModel.Game
     /// <summary>
     /// Represents a square in Drop-Tac-Toe
     /// </summary>
-    public class DropTacToeSquare : ObservableObject
+    public partial class DropTacToeSquare : ObservableObject
     {
         private TicTacToeEnum _value = TicTacToeEnum.None;
         public TicTacToeEnum Value

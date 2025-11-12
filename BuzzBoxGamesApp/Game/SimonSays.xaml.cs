@@ -8,9 +8,11 @@ public partial class SimonSays : ContentPage
 {
     private static SKLottieImageSourceConverter _lottieConverter = new SKLottieImageSourceConverter();
 
-    public SimonSays()
+    public SimonSays(bool autoRestart)
 	{
-		InitializeComponent();
+        BindingContext = new BuzzBoxGames.ViewModel.Game.SimonSays(autoRestart);
+        
+        InitializeComponent();
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.SimonSays context)
         {
@@ -22,10 +24,7 @@ public partial class SimonSays : ContentPage
     {
         var context = BindingContext as BuzzBoxGames.ViewModel.Game.SimonSays;
 
-        if (context != null)
-        {
-            context.EndGame?.Execute(null);
-        }
+        context?.Dispose();
     }
 
     private void _confetti_AnimationCompleted(object sender, EventArgs e)

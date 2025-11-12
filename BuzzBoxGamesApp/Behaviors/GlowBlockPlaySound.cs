@@ -4,9 +4,9 @@ using System;
 
 namespace BuzzBoxGamesApp.Behaviors
 {
-    public class GlowBlockPlaySound : Behavior<GlowBlock>
+    public partial class GlowBlockPlaySound : Behavior<GlowBlock>
     {
-        private IAudioPlayer? _audioPlayer = null;
+        private AsyncAudioPlayer? _audioPlayer = null;
 
         public static readonly BindableProperty SoundNameProperty =
             BindableProperty.Create(nameof(SoundName), typeof(string), typeof(GlowBlockPlaySound), propertyChanged: async (b, o, n) =>
@@ -21,7 +21,7 @@ namespace BuzzBoxGamesApp.Behaviors
 
                     if (n != null)
                     {
-                        bb._audioPlayer = AudioManager.Current.CreatePlayer(await FileSystem.OpenAppPackageFileAsync((string)n));
+                        bb._audioPlayer = AudioManager.Current.CreateAsyncPlayer(await FileSystem.OpenAppPackageFileAsync((string)n));
                     }
                 }
             });
@@ -52,7 +52,7 @@ namespace BuzzBoxGamesApp.Behaviors
             base.OnDetachingFrom(control);
         }
 
-        private void Control_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private async void Control_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == nameof(GlowBlock.IsLit))
             {
@@ -67,7 +67,7 @@ namespace BuzzBoxGamesApp.Behaviors
                                 _audioPlayer.Stop();
                             }
 
-                            _audioPlayer.Play();
+                            await _audioPlayer.PlayAsync(CancellationToken.None);
                         }
                     }
                 }

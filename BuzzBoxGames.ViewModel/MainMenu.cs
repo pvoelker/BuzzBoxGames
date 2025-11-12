@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace BuzzBoxGames.ViewModel
 {
-    public class MainMenu : ObservableValidator
+    public partial class MainMenu : ObservableValidator
     {
         public MainMenu()
         {
@@ -46,6 +46,13 @@ namespace BuzzBoxGames.ViewModel
         public bool IsVersionInfoPresent
         {
             get => Version != null;
+        }
+
+        private bool _autoRestart = true;
+        public bool AutoRestart
+        {
+            get => _autoRestart;
+            set => SetProperty(ref _autoRestart, value);
         }
 
         private Version? _version;

@@ -4,13 +4,13 @@ using System;
 
 namespace BuzzBoxGames.ViewModel.Game
 {
-    public class SimonSays : BaseGame
+    public partial class SimonSays : BaseGame
     {
         public enum GameStateEnum { Waiting, Started }
 
         private readonly Random _rnd = new();
 
-        private readonly List<Paddle> _sequence = new();
+        private readonly List<Paddle> _sequence = [];
 
         private int? _currentSequenceIndex = null;
 
@@ -18,7 +18,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         private readonly List<Paddle> _allPaddles = [Paddle.RED_1, Paddle.RED_2, Paddle.RED_3, Paddle.RED_4, Paddle.GREEN_1, Paddle.GREEN_2, Paddle.GREEN_3, Paddle.GREEN_4];
 
-        public SimonSays()
+        public SimonSays(bool autoRestart) : base(autoRestart)
         {
             _api.BuzzIn += _api_BuzzIn;
 
@@ -249,16 +249,13 @@ namespace BuzzBoxGames.ViewModel.Game
                 }
                 else
                 {
-                    Task.Run(async () => // Need to look into why this is needed
-                    {
-                        _api.Reset(); // Not using 'StopPaddleLockout' as is causes a beep
+                    _api.Reset(); // Not using 'StopPaddleLockout' as is causes a beep
 
-                        InGameInstructions = "Repeat the pattern!";
+                    InGameInstructions = "Repeat the pattern!";
 
-                        _currentSequenceIndex = null;
+                    _currentSequenceIndex = null;
 
-                        _repeatCurrentSequenceIndex = 0;
-                    });
+                    _repeatCurrentSequenceIndex = 0;
                 }
             }
             else

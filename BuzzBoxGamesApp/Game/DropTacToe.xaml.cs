@@ -8,9 +8,11 @@ public partial class DropTacToe : ContentPage
 {
     private static SKLottieImageSourceConverter _lottieConverter = new SKLottieImageSourceConverter();
 
-    public DropTacToe()
+    public DropTacToe(bool autoRestart)
 	{
-		InitializeComponent();
+        BindingContext = new BuzzBoxGames.ViewModel.Game.DropTacToe(autoRestart);
+        
+        InitializeComponent();
 
         if (BindingContext is BuzzBoxGames.ViewModel.Game.DropTacToe context)
         {
@@ -22,10 +24,7 @@ public partial class DropTacToe : ContentPage
     {
         var context = BindingContext as BuzzBoxGames.ViewModel.Game.DropTacToe;
 
-        if (context != null)
-        {
-            context.EndGame?.Execute(null);
-        }
+        context?.Dispose();
     }
 
     private void _confetti_AnimationCompleted(object sender, EventArgs e)

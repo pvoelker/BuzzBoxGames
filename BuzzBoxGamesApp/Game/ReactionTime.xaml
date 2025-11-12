@@ -7,9 +7,6 @@
              x:Class="BuzzBoxGamesApp.Game.ReactionTime"
              Title="Reaction Time"
              Unloaded="ContentPage_Unloaded">
-    <ContentPage.BindingContext>
-        <vm:ReactionTime />
-    </ContentPage.BindingContext>
     <ContentPage.Resources>
         <Style x:Key="preGameInstructions" TargetType="Label">
             <Setter Property="Background" Value="#CC222222" />
@@ -48,6 +45,7 @@
                 <RowDefinition Height="5" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="10" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -136,6 +134,11 @@
                     Style="{StaticResource resetButton}"
                     Text="Restart Game"
                     Command="{Binding Path=StartGame}" />
+
+            <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="15"
+                   Style="{StaticResource restartCountdown}"
+                   Text="{Binding Path=RestartCountdown, StringFormat='Game Restarting in {0} seconds...'}"
+                   IsVisible="{Binding Path=HasRestartCountdown}"/>
         </Grid>
     </Grid>
 </ContentPage>

@@ -12,6 +12,11 @@ Always make sure to update the dotnet workloads:
 
 # Updating Version
 
+File version format is: [major].[minor].[build].[revision].  Build number never resets and keeps incrementing.  Revision will typically be zero (0)
+Using:
+- https://semver.org/spec/v2.0.0.html
+- https://learn.microsoft.com/en-us/dotnet/standard/library-guidance/versioning
+
 - Increment 'ApplicationVersion'
 - Update 'AssemblyVersion'
 - Update 'FileVersion'
@@ -28,18 +33,18 @@ Always make sure to update the dotnet workloads:
 
 ## Windows
 
-- The signing certificate needs to be added to the Certificate Manager ('certmgr')
-- The certificate thumbnail needs to be known
-- In the BuzzBoxGamesApp project file, 'PackageCertificateThumbprint' may need to be updated to the current thumbnail
+- The signing certificate needs to be added to the Certificate Manager ('certmgr') or need to use a certificate dongle
+- The certificate thumbnail/hash needs to be known
+- In the BuzzBoxGamesApp project file, 'PackageCertificateThumbprint' may need to be updated to the current thumbnail/hash
 
 ### 64-bit Windows
-> dotnet publish -f net8.0-windows10.0.19041.0 -c Release /p:RuntimeIdentifierOverride=win10-x64
+> dotnet publish -f net9.0-windows10.0.19041.0 -c Release
 
 ## MacOS (Catalyst)
 
 Reference: https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/publish-outside-app-store
 
-> dotnet publish -f net8.0-maccatalyst -c Release
+> dotnet publish -f net9.0-maccatalyst -c Release
 
 You may need to enter the admin password for the build machine serveral times.
 

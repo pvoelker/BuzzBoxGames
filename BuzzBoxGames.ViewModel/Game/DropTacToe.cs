@@ -6,17 +6,17 @@ using TicTacToe.Game;
 
 namespace BuzzBoxGames.ViewModel.Game
 {
-    public class DropTacToe : BaseGame
+    public partial class DropTacToe : BaseGame
     {
         private const int GRID_SIZE = 4;
 
         public enum GameStateEnum { Waiting, Started }
 
-        private readonly Random _rnd = new Random();
+        private readonly Random _rnd = new();
 
         private readonly IMultiGame _gameEngine;
 
-        public DropTacToe()
+        public DropTacToe(bool autoRestart) : base(autoRestart)
         {
             Array.Fill(_data);
 
@@ -26,9 +26,12 @@ namespace BuzzBoxGames.ViewModel.Game
 
             NextRound = new RelayCommand(() =>
             {
-                EndGame.Execute(null);
+                if (GameState != GameStateEnum.Waiting) // PEV - 3/5/2024 - This check is needed because the 'is animation complete' keeps firing
+                {
+                    EndGame.Execute(null);
 
-                GameState = GameStateEnum.Waiting;
+                    GameState = GameStateEnum.Waiting;
+                }
             });
         }
 
@@ -183,7 +186,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         public bool HasWinner
         {
-            get { return _gameEngine.IsGameFinished && MapGameEngineIntToEnum(_gameEngine.Winner) != TicTacToeEnum.None ; }
+            get { return _gameEngine.IsGameFinished && MapGameEngineIntToEnum(_gameEngine.Winner) != TicTacToeEnum.None; }
         }
 
         public TicTacToeEnum Winner
@@ -206,7 +209,7 @@ namespace BuzzBoxGames.ViewModel.Game
         /// <summary>
         /// First dimension are rows, the second dimension are columns
         /// </summary>
-        private DropTacToeSquare[,] _data = new DropTacToeSquare[GRID_SIZE, GRID_SIZE];
+        private readonly DropTacToeSquare[,] _data = new DropTacToeSquare[GRID_SIZE, GRID_SIZE];
         public DropTacToeSquare Data_0_0
         {
             get => _data[0, 0];

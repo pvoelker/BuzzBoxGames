@@ -2,7 +2,7 @@
 
 namespace BuzzBoxGames.ViewModel
 {
-    public class InputMonitoringWarn : ObservableObject
+    public partial class InputMonitoringWarn : ObservableObject
     {
         public InputMonitoringWarn()
         {

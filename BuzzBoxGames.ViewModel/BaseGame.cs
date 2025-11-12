@@ -9,18 +9,26 @@ namespace BuzzBoxGames.ViewModel.Game
     /// <summary>
     /// Base class that implements basic connect/disconnect to a quiz box
     /// </summary>
-    public abstract class BaseGame : ObservableObject
+    public abstract class BaseGame : ObservableObject, IDisposable
     {
-        protected readonly QuizBoxApi _api = new QuizBoxApi(new QuizBoxCoreApi());
+        protected readonly QuizBoxApi _api = new(new QuizBoxCoreApi());
 
-        public BaseGame()
+        private IDispatcherTimer? _countdownTimer;
+
+        private bool _disposedValue;
+
+        public BaseGame(bool autoRestart)
         {
+            AutoRestart = autoRestart;
+
             _api.DisconnectionDetected += _api_DisconnectionDetected;
 
             StartGame = new RelayCommand(() =>
             {
                 if (_api.Connect())
                 {
+                    _countdownTimer?.Stop();
+
                     ResetGame();
                 }
                 else
@@ -47,8 +55,39 @@ namespace BuzzBoxGames.ViewModel.Game
                     await Task.Delay(50);
 
                     _api.Disconnect();
+
+                    if(AutoRestart)
+                    {
+                        BeginAutoRestart();
+                    }
                 });
             });
+
+            if (Application.Current != null)
+            {
+                _countdownTimer = Application.Current.Dispatcher.CreateTimer();
+                _countdownTimer.Interval = TimeSpan.FromSeconds(1);
+                _countdownTimer.IsRepeating = true;
+                _countdownTimer.Tick += (s, e) =>
+                {
+                    if(RestartCountdown > 0)
+                    {
+                        RestartCountdown--;
+                    }
+                    if(RestartCountdown == 0)
+                    {
+                        // Note: Countdown timer stopped in 'start game'
+                        StartGame.Execute(null);
+                    }
+                };
+            }
+        }
+
+        protected void BeginAutoRestart()
+        {
+            RestartCountdown = 10;
+
+            _countdownTimer?.Start();
         }
 
         private void _api_DisconnectionDetected(object? sender, DisconnectionEventArgs e)
@@ -94,7 +133,30 @@ namespace BuzzBoxGames.ViewModel.Game
 
         #endregion
 
+        private bool _autoRestart;
+        public bool AutoRestart
+        {
+            get => _autoRestart;
+            private set => SetProperty(ref _autoRestart, value);
+        }
+
+        private int _restartCountdown = 0;
+        public int RestartCountdown
+        {
+            get => _restartCountdown;
+            private set
+            {
+                SetProperty(ref _restartCountdown, value);
+                OnPropertyChanged(nameof(HasRestartCountdown));
+            }
+        }
+        public bool HasRestartCountdown
+        {
+            get => _restartCountdown > 0;
+        }
+
         private IMessageBoxService? _messageBoxService = null;
+
         /// <summary>
         /// Message box service
         /// </summary>
@@ -103,5 +165,36 @@ namespace BuzzBoxGames.ViewModel.Game
             get => _messageBoxService;
             set => SetProperty(ref _messageBoxService, value);
         }
+
+        #region IDisposable
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    AutoRestart = false;
+
+                    if (_countdownTimer != null)
+                    {
+                        _countdownTimer.Stop();
+                        _countdownTimer = null;
+                    }
+
+                    EndGame.Execute(null);
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
     }
 }

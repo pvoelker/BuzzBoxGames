@@ -18,7 +18,7 @@ namespace BuzzBoxGames.ViewModel
             {
                 for (int j = 0; j < array.GetLength(1); j++)
                 {
-                    var value = (T?)Activator.CreateInstance(typeof(T));
+                    var value = Activator.CreateInstance<T>();
                     if (value != null)
                     {
                         array[i, j] = value;

@@ -4,13 +4,13 @@ using System;
 
 namespace BuzzBoxGames.ViewModel.Game
 {
-    public class ReactionTime : BaseGame
+    public partial class ReactionTime : BaseGame
     {
         public enum GameStateEnum { Waiting, Started, Done }
 
         public List<ReactionTimePaddle> _allPaddles;
 
-        public ReactionTime()
+        public ReactionTime(bool autoRestart) : base(autoRestart)
         {
             _api.GameStarted += _api_GameStarted;
             _api.GameDone += _api_GameDone;
