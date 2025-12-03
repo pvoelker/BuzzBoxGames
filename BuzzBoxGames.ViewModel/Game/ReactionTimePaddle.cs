@@ -8,7 +8,7 @@ namespace BuzzBoxGames.ViewModel.Game
     /// </summary>
     public partial class ReactionTimePaddle(string paddleName) : ObservableObject
     {
-        public static double MaxTime { get => 1000; }
+        public double MaxTime { get => 1000; } // Don't make static as it breaks XAML binding
 
         private readonly string _paddleName = paddleName;
         public string PaddleName
@@ -28,7 +28,7 @@ namespace BuzzBoxGames.ViewModel.Game
                 OnPropertyChanged(nameof(NotBuzzedIn));
             }
         }
-        public double? Score { get => ReactionTimePaddle.MaxTime - _time; }
+        public double? Score { get => MaxTime - _time; }
         public bool BuzzedIn { get => _time != null; }
         public bool NotBuzzedIn { get => _time == null; }
 

@@ -13,7 +13,7 @@ namespace BuzzBoxGamesApp.Services
         /// <inheritdoc />
         public void ShowError(string message)
         {
-            _page.DisplayAlert("Error", message, "OK");
+            _page.DisplayAlertAsync("Error", message, "OK");
         }
     }
 }

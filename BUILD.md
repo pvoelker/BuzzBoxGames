@@ -38,13 +38,13 @@ Using:
 - In the BuzzBoxGamesApp project file, 'PackageCertificateThumbprint' may need to be updated to the current thumbnail/hash
 
 ### 64-bit Windows
-> dotnet publish -f net9.0-windows10.0.19041.0 -c Release
+> dotnet publish -f net10.0-windows10.0.19041.0 -c Release
 
 ## MacOS (Catalyst)
 
 Reference: https://learn.microsoft.com/en-us/dotnet/maui/mac-catalyst/deployment/publish-outside-app-store
 
-> dotnet publish -f net9.0-maccatalyst -c Release
+> dotnet publish -f net10.0-maccatalyst -c Release
 
 You may need to enter the admin password for the build machine serveral times.
 
