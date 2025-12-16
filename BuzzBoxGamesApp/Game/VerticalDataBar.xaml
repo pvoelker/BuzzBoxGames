@@ -4,7 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BuzzBoxGamesApp.Game.VerticalDataBar">
     <Grid x:Name="_grid">
-        <Border         
+        <Border
+            x:Name="_bkbar"
             x:DataType="local:VerticalDataBar"
             Background="{Binding Path=Background, Source={RelativeSource AncestorType={x:Type local:VerticalDataBar}}, Mode=OneWay}"
             Stroke="Black"

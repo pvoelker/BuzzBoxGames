@@ -16,23 +16,18 @@ public partial class VerticalDataBar : ContentView
 
     public static readonly BindableProperty MaxProperty = BindableProperty.Create(nameof(Max), typeof(double), typeof(VerticalDataBar), 100.0, propertyChanged: (bindable, oldValue, newValue) =>
     {
-        var gb = bindable as VerticalDataBar;
-
-        if (gb != null)
+        if (bindable is VerticalDataBar gb)
         {
-            gb.InvalidateMeasure();
+            CalculateBarHeight(gb);
         }
     });
     public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(double), typeof(VerticalDataBar), 7.5, propertyChanged: (bindable, oldValue, newValue) =>
     {
-        var gb = bindable as VerticalDataBar;
-
-        if (gb != null)
+        if (bindable is VerticalDataBar gb)
         {
-            gb.InvalidateMeasure();
+            CalculateBarHeight(gb);
         }
     });
-
     public static readonly BindableProperty FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(VerticalDataBar), "OpenSansRegular");
     public static readonly BindableProperty FontSizeProperty = BindableProperty.Create(nameof(FontSize), typeof(double), typeof(VerticalDataBar), 24.0);
     public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(VerticalDataBar), String.Empty);
@@ -88,15 +83,20 @@ public partial class VerticalDataBar : ContentView
         set => SetValue(BarProperty, value);
     }
 
-    protected override void OnSizeAllocated(double width, double height)
+    protected override Size ArrangeOverride(Rect bounds)
     {
-        base.OnSizeAllocated(width, height);
+        CalculateBarHeight(this);
 
-        if (_bar != null)
+        return base.ArrangeOverride(bounds);
+    }
+
+    static protected void CalculateBarHeight(VerticalDataBar gb)
+    {
+        if (gb._bar != null)
         {
-            var percentage = Value / Max;
+            var percentage = gb.Value / gb.Max;
 
-            _bar.HeightRequest = percentage * height;
+            gb._bar.HeightRequest = percentage * gb._bkbar.Height;
         }
     }
 }

@@ -8,7 +8,9 @@ namespace BuzzBoxGames.ViewModel.Game
     /// </summary>
     public partial class ReactionTimePaddle(string paddleName) : ObservableObject
     {
+#pragma warning disable CA1822 // Mark members as static
         public double MaxTime { get => 1000; } // Don't make static as it breaks XAML binding
+#pragma warning restore CA1822 // Mark members as static
 
         private readonly string _paddleName = paddleName;
         public string PaddleName

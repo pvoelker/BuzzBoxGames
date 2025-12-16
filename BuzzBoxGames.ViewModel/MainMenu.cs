@@ -10,6 +10,8 @@ namespace BuzzBoxGames.ViewModel
         {
             var assembly = Assembly.GetEntryAssembly();
 
+            _autoRestart = Preferences.Default.Get(PreferenceKeys.EnableGameAutoRestart, true);
+
             if (assembly != null)
             {
                 var assemblyName = assembly.GetName();
@@ -52,7 +54,11 @@ namespace BuzzBoxGames.ViewModel
         public bool AutoRestart
         {
             get => _autoRestart;
-            set => SetProperty(ref _autoRestart, value);
+            set
+            {
+                Preferences.Default.Set(PreferenceKeys.EnableGameAutoRestart, value);
+                SetProperty(ref _autoRestart, value);
+            }
         }
 
         private Version? _version;

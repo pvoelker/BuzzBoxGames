@@ -20,7 +20,7 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             Array.Fill(_data);
 
-            _api.BuzzIn += _api_BuzzIn;
+            _api.BuzzIn += API_BuzzIn;
 
             _gameEngine = Factory.CreateNewGame(2, 3, [GRID_SIZE, GRID_SIZE]);
 
@@ -86,7 +86,7 @@ namespace BuzzBoxGames.ViewModel.Game
             GameState = GameStateEnum.Waiting;
         }
 
-        private void _api_BuzzIn(object? sender, BuzzInEventArgs e)
+        private void API_BuzzIn(object? sender, BuzzInEventArgs e)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -476,30 +476,23 @@ namespace BuzzBoxGames.ViewModel.Game
 
         static private TicTacToeEnum MapGameEngineIntToEnum(int val)
         {
-            switch(val)
+            return val switch
             {
-                case 0:
-                    return TicTacToeEnum.None;
-                case 1:
-                    return TicTacToeEnum.X;
-                case 2:
-                    return TicTacToeEnum.O;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(val));
-            }
+                0 => TicTacToeEnum.None,
+                1 => TicTacToeEnum.X,
+                2 => TicTacToeEnum.O,
+                _ => throw new ArgumentOutOfRangeException(nameof(val)),
+            };
         }
 
         static private TicTacToeEnum MapPaddleColorToEnum(PaddleColorEnum val)
         {
-            switch (val)
+            return val switch
             {
-                case PaddleColorEnum.Red:
-                    return TicTacToeEnum.X;
-                case PaddleColorEnum.Green:
-                    return TicTacToeEnum.O;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(val));
-            }
+                PaddleColorEnum.Red => TicTacToeEnum.X,
+                PaddleColorEnum.Green => TicTacToeEnum.O,
+                _ => throw new ArgumentOutOfRangeException(nameof(val)),
+            };
         }
     }
 }

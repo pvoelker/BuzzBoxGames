@@ -20,7 +20,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         public SimonSays(bool autoRestart) : base(autoRestart)
         {
-            _api.BuzzIn += _api_BuzzIn;
+            _api.BuzzIn += API_BuzzIn;
 
             NextSequence = new RelayCommand(() =>
             {
@@ -56,7 +56,7 @@ namespace BuzzBoxGames.ViewModel.Game
             GameState = GameStateEnum.Waiting;
         }
 
-        private void _api_BuzzIn(object? sender, BuzzInEventArgs e)
+        private void API_BuzzIn(object? sender, BuzzInEventArgs e)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {

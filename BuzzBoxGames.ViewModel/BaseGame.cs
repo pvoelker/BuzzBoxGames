@@ -21,7 +21,7 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             AutoRestart = autoRestart;
 
-            _api.DisconnectionDetected += _api_DisconnectionDetected;
+            _api.DisconnectionDetected += API_DisconnectionDetected;
 
             StartGame = new RelayCommand(() =>
             {
@@ -90,7 +90,7 @@ namespace BuzzBoxGames.ViewModel.Game
             _countdownTimer?.Start();
         }
 
-        private void _api_DisconnectionDetected(object? sender, DisconnectionEventArgs e)
+        private void API_DisconnectionDetected(object? sender, DisconnectionEventArgs e)
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
@@ -176,11 +176,8 @@ namespace BuzzBoxGames.ViewModel.Game
                 {
                     AutoRestart = false;
 
-                    if (_countdownTimer != null)
-                    {
-                        _countdownTimer.Stop();
-                        _countdownTimer = null;
-                    }
+                    _countdownTimer?.Stop();
+                    _countdownTimer = null;
 
                     EndGame.Execute(null);
                 }

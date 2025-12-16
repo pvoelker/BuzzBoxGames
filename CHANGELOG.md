@@ -18,3 +18,8 @@ Track changes made to the game application.
 - Update to .NET Core 9 and latest dependencies, including various code cleanup
 - Add 'auto restart' feature where games can automatically restart after one is finished
 - Update to beta version of BriansUsbQuizBoxApi to support Kirkman quiz box
+
+## Version 1.1.2.1 (app ver 4) - Beta 2
+
+- Update to .NET Core 10 and latest dependencies
+- Update README with new Kirkman quiz box support

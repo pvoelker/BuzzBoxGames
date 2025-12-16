@@ -35,7 +35,7 @@
         <local:VerticalDataBar Style="{StaticResource scoreBar}"
                                TextColor="{Binding Path=BarTextColor, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
                                IsVisible="{Binding Path=Value.BuzzedIn, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
-                               Text="{Binding Path=Value.Time, StringFormat='{0:0} ms', Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
+                               Text="{Binding Path=Value.Time, StringFormat='{0:0}', Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"
                                Value="{Binding Path=Value.Score, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, TargetNullValue='0.0', Mode=OneWay}"
                                Max="{Binding Path=Value.MaxTime, Source={RelativeSource AncestorType={x:Type local:ReactionTimePaddle}}, Mode=OneWay}"/>
         <Label Style="{StaticResource noBuzzIn}"

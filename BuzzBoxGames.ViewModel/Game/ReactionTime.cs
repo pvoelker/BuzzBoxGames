@@ -12,8 +12,8 @@ namespace BuzzBoxGames.ViewModel.Game
 
         public ReactionTime(bool autoRestart) : base(autoRestart)
         {
-            _api.GameStarted += _api_GameStarted;
-            _api.GameDone += _api_GameDone;
+            _api.GameStarted += API_GameStarted;
+            _api.GameDone += API_GameDone;
 
             _allPaddles =
             [
@@ -40,7 +40,7 @@ namespace BuzzBoxGames.ViewModel.Game
             GameState = GameStateEnum.Waiting;
         }
 
-        private void _api_GameDone(object? sender, GameDoneEventArgs e)
+        private void API_GameDone(object? sender, GameDoneEventArgs e)
         {
             GameState = GameStateEnum.Done;
 
@@ -71,7 +71,7 @@ namespace BuzzBoxGames.ViewModel.Game
             EndGame.Execute(null);
         }
 
-        private void _api_GameStarted(object? sender, EventArgs e)
+        private void API_GameStarted(object? sender, EventArgs e)
         {
             GameState = GameStateEnum.Started;
         }
@@ -82,7 +82,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         #endregion
 
-        private void _api_BuzzInStats(object? sender, BuzzInStatsEventArgs e)
+        private void API_BuzzInStats(object? sender, BuzzInStatsEventArgs e)
         {
             Task.Run(_api.Reset);
         }
@@ -103,28 +103,28 @@ namespace BuzzBoxGames.ViewModel.Game
         public bool GameIsStarted { get => _gameState == GameStateEnum.Started; }
         public bool GameIsDone { get => _gameState == GameStateEnum.Done; }
 
-        private readonly ReactionTimePaddle _red1Paddle = new ReactionTimePaddle("Red 1");
+        private readonly ReactionTimePaddle _red1Paddle = new("Red 1");
         public ReactionTimePaddle Red1Paddle { get => _red1Paddle; }
 
-        private readonly ReactionTimePaddle _red2Paddle = new ReactionTimePaddle("Red 2");
+        private readonly ReactionTimePaddle _red2Paddle = new("Red 2");
         public ReactionTimePaddle Red2Paddle { get => _red2Paddle; }
 
-        private readonly ReactionTimePaddle _red3Paddle = new ReactionTimePaddle("Red 3");
+        private readonly ReactionTimePaddle _red3Paddle = new("Red 3");
         public ReactionTimePaddle Red3Paddle { get => _red3Paddle; }
 
-        private readonly ReactionTimePaddle _red4Paddle = new ReactionTimePaddle("Red 4");
+        private readonly ReactionTimePaddle _red4Paddle = new("Red 4");
         public ReactionTimePaddle Red4Paddle { get => _red4Paddle; }
 
-        private readonly ReactionTimePaddle _green1Paddle = new ReactionTimePaddle("Green 1");
+        private readonly ReactionTimePaddle _green1Paddle = new("Green 1");
         public ReactionTimePaddle Green1Paddle { get => _green1Paddle; }
 
-        private readonly ReactionTimePaddle _green2Paddle = new ReactionTimePaddle("Green 2");
+        private readonly ReactionTimePaddle _green2Paddle = new("Green 2");
         public ReactionTimePaddle Green2Paddle { get => _green2Paddle; }
 
-        private readonly ReactionTimePaddle _green3Paddle = new ReactionTimePaddle("Green 3");
+        private readonly ReactionTimePaddle _green3Paddle = new("Green 3");
         public ReactionTimePaddle Green3Paddle { get => _green3Paddle; }
 
-        private readonly ReactionTimePaddle _green4Paddle = new ReactionTimePaddle("Green 4");
+        private readonly ReactionTimePaddle _green4Paddle = new("Green 4");
         public ReactionTimePaddle Green4Paddle { get => _green4Paddle; }
     }
 }
