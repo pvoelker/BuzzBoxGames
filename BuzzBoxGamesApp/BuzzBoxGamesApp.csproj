@@ -46,7 +46,7 @@
 		<PublisherName>Paul Voelker</PublisherName>
 		<Title>Buzz Box Games</Title>
 		<Product>Buzz Box Games</Product>
-		<Description>A collection of games to play using Brian's Boxes quizzing sets</Description>
+		<Description>A collection of games to play using Brian's Quiz Box, Kirkman Basic Quizbox Plus or compatible quizzing sets</Description>
 		<Copyright>Copyright © 2025 Paul Voelker</Copyright>
 		<DefaultLanguage>en</DefaultLanguage>
 	</PropertyGroup>
@@ -86,10 +86,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.11" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.11" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.51" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="10.0.51" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
 		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="3.0.0" />
 	</ItemGroup>
 

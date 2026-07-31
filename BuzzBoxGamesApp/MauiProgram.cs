@@ -13,7 +13,7 @@ namespace BuzzBoxGamesApp
             builder
                 .UseMauiApp<App>()
                 .UseSkiaSharp()
-                .UseMauiCommunityToolkitMediaElement()
+                .UseMauiCommunityToolkitMediaElement(isAndroidForegroundServiceEnabled: false)
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

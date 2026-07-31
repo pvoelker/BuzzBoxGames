@@ -23,3 +23,7 @@ Track changes made to the game application.
 
 - Update to .NET Core 10 and latest dependencies
 - Update README with new Kirkman quiz box support
+- WIP --- Need to cut new version??
+- Persist 'auto restart' setting between sessions
+- Fix bug in reaction game where score bars are not properly updated
+- Improve drop tac toe to lockout paddles after winning move

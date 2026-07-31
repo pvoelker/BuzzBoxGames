@@ -15,7 +15,7 @@ namespace BuzzBoxGames.ViewModel.Game
 
         private IDispatcherTimer? _countdownTimer;
 
-        private bool _disposedValue;
+        protected bool _disposedValue;
 
         public BaseGame(bool autoRestart)
         {

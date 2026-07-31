@@ -90,6 +90,8 @@ namespace BuzzBoxGames.ViewModel.Game
         {
             MainThread.BeginInvokeOnMainThread(() =>
             {
+                bool bPaddleLockout = false;
+
                 if (HasWinner == false)
                 {
                     var player = MapGameEngineIntToEnum(_gameEngine.NextPlayer);
@@ -116,6 +118,9 @@ namespace BuzzBoxGames.ViewModel.Game
                             {
                                 // Wait for animation to complete and reset the game
                                 WinningMove?.Execute(null);
+
+                                _api.StartPaddleLockout();
+                                bPaddleLockout = true;
                             }
                             else
                             {
@@ -134,7 +139,10 @@ namespace BuzzBoxGames.ViewModel.Game
                     // If game has a winner, ignore buzz ins
                 }
 
-                _api.Reset();
+                if (bPaddleLockout == false)
+                {
+                    _api.Reset();
+                }
             });
         }
 

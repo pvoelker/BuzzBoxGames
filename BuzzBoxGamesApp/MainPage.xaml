@@ -124,7 +124,7 @@
                     Text="Drop-Tac-Toe" />
 
             <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                   Style="{StaticResource additionalInfo}">Requires a Brian's Boxes or compatible quiz set to be connected using USB</Label>
+                   Style="{StaticResource additionalInfo}">Requires a compatible quiz set to be connected using USB</Label>
 
             <HorizontalStackLayout Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"
                                    HorizontalOptions="Center">

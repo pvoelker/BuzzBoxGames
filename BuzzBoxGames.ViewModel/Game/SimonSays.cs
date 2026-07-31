@@ -24,16 +24,19 @@ namespace BuzzBoxGames.ViewModel.Game
 
             NextSequence = new RelayCommand(() =>
             {
-                _repeatCurrentSequenceIndex = null;
-
-                _sequence.Add(GetRandomPaddle());
-
-                if (Score != null)
+                if (_sequence.Count > 0)
                 {
-                    Score = Score.Value + 1;
-                }
+                    _repeatCurrentSequenceIndex = null;
 
-                PlaySequence();
+                    _sequence.Add(GetRandomPaddle());
+
+                    if (Score != null)
+                    {
+                        Score = Score.Value + 1;
+                    }
+
+                    PlaySequence();
+                }
             });
         }
 
@@ -78,6 +81,9 @@ namespace BuzzBoxGames.ViewModel.Game
                             {
                                 CorrectSequence = true;
 
+                                // Prevent paddle presses before NextSequence is called
+                                _api.StartPaddleLockout();
+
                                 InGameInstructions = "Good job! Keep going...";
 
                                 // Wait for NextSequence to be called
@@ -96,6 +102,10 @@ namespace BuzzBoxGames.ViewModel.Game
                     {
                         var _ = Task.Run(() =>
                         {
+                            // Clear sequence
+                            _sequence.Clear();
+                            _repeatCurrentSequenceIndex = null;
+
                             WrongPaddlePress?.Execute(null);
 
                             EndGame.Execute(null);
@@ -229,53 +239,56 @@ namespace BuzzBoxGames.ViewModel.Game
 
         private void PlayNextInSequence()
         {
-            if(_currentSequenceIndex.HasValue)
+            if (_sequence.Count > 0)
             {
-                LitePaddle(_sequence[_currentSequenceIndex.Value], false);
-
-                _currentSequenceIndex++;
-                if (_currentSequenceIndex < _sequence.Count)
+                if (_currentSequenceIndex.HasValue)
                 {
-                    Task.Run(async () =>
-                    {
-                        await Task.Delay(200);
+                    LitePaddle(_sequence[_currentSequenceIndex.Value], false);
 
+                    _currentSequenceIndex++;
+                    if (_currentSequenceIndex < _sequence.Count)
+                    {
+                        Task.Run(async () =>
+                        {
+                            await Task.Delay(200);
+
+                            LitePaddle(_sequence[_currentSequenceIndex.Value], true);
+
+                            await Task.Delay(1000);
+
+                            PlayNextInSequence();
+                        });
+                    }
+                    else
+                    {
+                        _api.Reset(); // Not using 'StopPaddleLockout' as is causes a beep on Brian's Box
+
+                        InGameInstructions = "Repeat the pattern!";
+
+                        _currentSequenceIndex = null;
+
+                        _repeatCurrentSequenceIndex = 0;
+                    }
+                }
+                else
+                {
+                    _currentSequenceIndex = 0;
+
+                    if (_sequence.Count > 0)
+                    {
                         LitePaddle(_sequence[_currentSequenceIndex.Value], true);
 
-                        await Task.Delay(1000);
+                        Task.Run(async () =>
+                        {
+                            await Task.Delay(1000);
 
-                        PlayNextInSequence();
-                    });
-                }
-                else
-                {
-                    _api.Reset(); // Not using 'StopPaddleLockout' as is causes a beep
-
-                    InGameInstructions = "Repeat the pattern!";
-
-                    _currentSequenceIndex = null;
-
-                    _repeatCurrentSequenceIndex = 0;
-                }
-            }
-            else
-            {
-                _currentSequenceIndex = 0;
-
-                if (_sequence.Count > 0)
-                {
-                    LitePaddle(_sequence[_currentSequenceIndex.Value], true);
-
-                    Task.Run(async () =>
+                            PlayNextInSequence();
+                        });
+                    }
+                    else
                     {
-                        await Task.Delay(1000);
-
-                        PlayNextInSequence();
-                    });
-                }
-                else
-                {
-                    throw new InvalidOperationException("A least one element is expected in the paddle sequence");
+                        throw new InvalidOperationException("A least one element is expected in the paddle sequence");
+                    }
                 }
             }
         }
